@@ -16,6 +16,6 @@
     </environment>
   </environments>
   <mappers>
- 
+    <mapper resource="mappers/AirLineRouteMapper.xml"/>
   </mappers>
 </configuration>
