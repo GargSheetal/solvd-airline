@@ -1,1 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="solvd.airline.dataaccess.model.AirlineRoute.AirLineRouteMapper">
+    <select id="getRoute" parameterType="int" resultType="solvd.airline.dataaccess.model.AirlineRoute.AirLineRoute">
+        SELECT * FROM `airline_routes` WHERE `airline_route_id` = #{id}
+    </select>
+    <select id="getAllRoutes" resultType="solvd.airline.dataaccess.model.AirlineRoute.AirLineRoute">
+        SELECT * FROM `airline_routes`
+    </select>
+    <update id="updateRoute" parameterType="solvd.airline.dataaccess.model.AirlineRoute.AirLineRoute">
+        UPDATE `airline_routes` SET `origin_location_id` = #{originLocationId}, `destination_location_id` = #{destinationLocationId}, `distance_miles` = #{distanceMiles}, `price` = #{priceDollars} WHERE `airline_route_id` = #{routeId}
+    </update>
+    <delete id="deleteRoute" parameterType="int">
+        DELETE FROM `airline_routes` WHERE `airline_route_id` = #{id}
+    </delete>
+    <insert id="addRoute" parameterType="solvd.airline.dataaccess.model.AirlineRoute.AirLineRoute">
+        INSERT INTO `airline_routes`(`origin_location_id`, `destination_location_id`, `distance_miles`, `price`) VALUES (#{originLocationId}, #{destinationLocationId}, #{distanceMiles}, #{priceDollars})
+    </insert>
+</mapper>

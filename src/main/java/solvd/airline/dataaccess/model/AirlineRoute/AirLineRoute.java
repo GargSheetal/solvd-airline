@@ -17,6 +17,18 @@ public class AirLineRoute {
     @XmlElement(name = "price_dollars")
     private double priceDollars;
 
+    public AirLineRoute() {
+
+    }
+
+    public AirLineRoute(int routeId, int originLocationId, int destinationLocationId, int distanceMiles, double priceDollars) {
+        this.routeId = routeId;
+        this.originLocationId = originLocationId;
+        this.destinationLocationId = destinationLocationId;
+        this.distanceMiles = distanceMiles;
+        this.priceDollars = priceDollars;
+    }
+
     // Getters
     public int getRouteId() {
         return routeId;
