@@ -21,10 +21,8 @@ public class XMLParser {
 
     public static void main(String[] args) {
         try {
-            File locationFile = new File("src/main/resources/xml/locations.xml");
             File airlineRouteFile = new File("src/main/resources/xml/airlineroute.xml");
-
-
+            
             // Parse AirLineRoute XML
             AirLineRoutes airlineRoutes = parseXml(airlineRouteFile, AirLineRoutes.class);
             logger.info(airlineRoutes);
