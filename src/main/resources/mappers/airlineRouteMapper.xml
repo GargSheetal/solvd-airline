@@ -14,6 +14,7 @@
         DELETE FROM `airline_routes` WHERE `airline_route_id` = #{id}
     </delete>
     <insert id="addRoute" parameterType="solvd.airline.dataaccess.model.AirlineRoute.AirLineRoute">
-        INSERT INTO `airline_routes`(`origin_location_id`, `destination_location_id`, `distance_miles`, `price`) VALUES (#{originLocationId}, #{destinationLocationId}, #{distanceMiles}, #{priceDollars})
+        INSERT INTO `airline_routes`(`origin_location_id`, `destination_location_id`, `distance_miles`, `price_dollars`) VALUES (#{originLocationId}, #{destinationLocationId}, #{distanceMiles}, #{priceDollars})
     </insert>
+
 </mapper>

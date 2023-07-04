@@ -1,5 +1,7 @@
 package solvd.airline.dataaccess.model.AirlineRoute;
 
+import solvd.airline.dataaccess.model.Location.Location;
+
 import javax.xml.bind.annotation.*;
 import java.util.Objects;
 
@@ -9,9 +11,9 @@ public class AirLineRoute {
     @XmlElement(name = "route_id")
     private int routeId;
     @XmlElement(name = "origin_location_id")
-    private int originLocationId;
+    private Location originLocation;
     @XmlElement(name = "destination_location_id")
-    private int destinationLocationId;
+    private Location destinationLocation;
     @XmlElement(name = "distance_miles")
     private int distanceMiles;
     @XmlElement(name = "price_dollars")
@@ -21,25 +23,26 @@ public class AirLineRoute {
 
     }
 
-    public AirLineRoute(int routeId, int originLocationId, int destinationLocationId, int distanceMiles, double priceDollars) {
+    public AirLineRoute(int routeId, Location originLocation, Location destinationLocation, int distanceMiles, double priceDollars) {
         this.routeId = routeId;
-        this.originLocationId = originLocationId;
-        this.destinationLocationId = destinationLocationId;
+        this.originLocation = originLocation;
+        this.destinationLocation = destinationLocation;
         this.distanceMiles = distanceMiles;
         this.priceDollars = priceDollars;
     }
+
 
     // Getters
     public int getRouteId() {
         return routeId;
     }
 
-    public int getOriginLocationId() {
-        return originLocationId;
+    public Location getOriginLocation() {
+        return originLocation;
     }
 
-    public int getDestinationLocationId() {
-        return destinationLocationId;
+    public Location getDestinationLocation() {
+        return destinationLocation;
     }
 
     public int getDistanceMiles() {
@@ -55,12 +58,12 @@ public class AirLineRoute {
         this.routeId = routeId;
     }
 
-    public void setOriginLocationId(int originLocationId) {
-        this.originLocationId = originLocationId;
+    public void setOriginLocation(Location originLocation) {
+        this.originLocation = originLocation;
     }
 
-    public void setDestinationLocationId(int destinationLocationId) {
-        this.destinationLocationId = destinationLocationId;
+    public void setDestinationLocation(Location destinationLocation) {
+        this.destinationLocation = destinationLocation;
     }
 
     public void setDistanceMiles(int distanceMiles) {
@@ -75,8 +78,8 @@ public class AirLineRoute {
     public String toString() {
         return "\nAirLineRoute{" +
                 "routeId=" + routeId +
-                ", originLocationId=" + originLocationId +
-                ", destinationLocationId=" + destinationLocationId +
+                ", originLocation=" + originLocation +
+                ", destinationLocation=" + destinationLocation +
                 ", distanceMiles=" + distanceMiles +
                 ", priceDollars=" + priceDollars +
                 "}";
@@ -89,14 +92,14 @@ public class AirLineRoute {
         if (o == null || getClass() != o.getClass()) return false;
         AirLineRoute that = (AirLineRoute) o;
         return routeId == that.routeId &&
-                originLocationId == that.originLocationId &&
-                destinationLocationId == that.destinationLocationId &&
                 distanceMiles == that.distanceMiles &&
-                Double.compare(that.priceDollars, priceDollars) == 0;
+                Double.compare(that.priceDollars, priceDollars) == 0 &&
+                Objects.equals(originLocation, that.originLocation) &&
+                Objects.equals(destinationLocation, that.destinationLocation);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(routeId, originLocationId, destinationLocationId, distanceMiles, priceDollars);
+        return Objects.hash(routeId, originLocation, destinationLocation, distanceMiles, priceDollars);
     }
 }
