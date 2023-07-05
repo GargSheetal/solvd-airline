@@ -1,4 +1,4 @@
-package solvd.airline.dataaccess.model.Location;
+package solvd.airline.dataaccess.model.location;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +8,12 @@ public class Locations {
     public Locations() {
         locations = new ArrayList<>();
     }
+    public List<Location> getAllLocations() {
+        return locations;
+    }
 
-    public void addLocation(Location location) {
+
+    /*public void addLocation(Location location) {
         locations.add(location);
     }
 
@@ -17,9 +21,6 @@ public class Locations {
         locations.remove(location);
     }
 
-    public List<Location> getAllLocations() {
-        return locations;
-    }
 
     public Location getLocationById(int locationId) {
         for (Location location : locations) {
@@ -28,5 +29,5 @@ public class Locations {
             }
         }
         return null;
-    }
+    }*/
 }

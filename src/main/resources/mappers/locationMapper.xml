@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="solvd.airline.dataaccess.model.ILocationRouteMapper">
+<mapper namespace="solvd.airline.dataaccess.model.location.LocationMapper">
 
 
-    <resultMap id="locationResultMap" type="solvd.airline.dataaccess.model.Location">
+    <resultMap id="locationResultMap" type="solvd.airline.dataaccess.model.location.Location">
         <id column="location_id" property="locationId"/>
         <result column="location_name" property="locationName"/>
     </resultMap>
 
     <select id="getAllLocations" resultMap="locationResultMap">
-        SELECT * FROM Locations
+        SELECT * FROM locations
     </select>
 
     <select id="getLocationById" resultMap="locationResultMap">
-        SELECT * FROM Locations WHERE location_id = #{locationId}
+        SELECT * FROM locations WHERE location_id = #{locationId}
     </select>
 
-    <insert id="insertLocation" parameterType="solvd.airline.dataaccess.model.Location">
-        INSERT INTO Locations (location_name)
+    <insert id="addLocation" parameterType="solvd.airline.dataaccess.model.location.Location">
+        INSERT INTO locations (location_name)
         VALUES (#{locationName})
     </insert>
 
-    <update id="updateLocation" parameterType="solvd.airline.dataaccess.model.Location">
-        UPDATE Locations
+    <update id="updateLocation" parameterType="solvd.airline.dataaccess.model.location.Location">
+        UPDATE locations
         SET location_name = #{locationName}
         WHERE location_id = #{locationId}
     </update>
 
-    <delete id="deleteLocation" parameterType="solvd.airline.dataaccess.model.Location">
-        DELETE FROM Locations
+    <delete id="deleteLocation" parameterType="solvd.airline.dataaccess.model.location.Location">
+        DELETE FROM locations
         WHERE location_id = #{locationId}
     </delete>
 

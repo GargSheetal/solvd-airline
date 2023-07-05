@@ -1,4 +1,4 @@
-package solvd.airline.dataaccess.model.Location;
+package solvd.airline.dataaccess.model.location;
 import java.util.List;
 
 public interface LocationMapper {

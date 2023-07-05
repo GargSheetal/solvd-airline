@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class JsonParser {
-    private static final String OUTPUT_DIRECTORY = "src/main/resources/output/sampleOutput.json";
+    private static final String OUTPUT_DIRECTORY = "src/main/resources/output";
 
     public static <T> void saveDataToJson(List<T> data, String filename) {
         ObjectMapper objectMapper = new ObjectMapper();

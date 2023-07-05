@@ -1,4 +1,4 @@
-package solvd.airline.dataaccess.model.Location;
+package solvd.airline.dataaccess.model.location;
 public class Location {
     private int locationId;
     private String locationName;
@@ -6,8 +6,7 @@ public class Location {
     public Location() {
     }
 
-    public Location(int locationId, String locationName) {
-        this.locationId = locationId;
+    public Location( String locationName) {
         this.locationName = locationName;
     }
 
