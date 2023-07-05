@@ -13,6 +13,10 @@ public class AirLineRoutes {
     @XmlElement(name = "airline_route")
     private List<AirLineRoute> routes;
 
+    public List<AirLineRoute> getRoutes() {
+        return routes;
+    }
+
     @Override
     public String toString() {
         return "AirLineRoutes{" +

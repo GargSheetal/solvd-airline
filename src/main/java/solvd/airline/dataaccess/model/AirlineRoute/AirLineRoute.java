@@ -30,6 +30,13 @@ public class AirLineRoute {
         this.priceDollars = priceDollars;
     }
 
+    public AirLineRoute(int routeId,Location originLocation, Location destinationLocation, int distanceMiles, double priceDollars) {
+        this.routeId = routeId;
+        this.originLocation = originLocation;
+        this.destinationLocation = destinationLocation;
+        this.distanceMiles = distanceMiles;
+        this.priceDollars = priceDollars;
+    }
 
     // Getters
     public int getRouteId() {
