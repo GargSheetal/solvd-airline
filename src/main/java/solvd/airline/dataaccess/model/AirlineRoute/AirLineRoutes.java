@@ -13,14 +13,6 @@ public class AirLineRoutes {
     @XmlElement(name = "airline_route")
     private List<AirLineRoute> routes;
 
-    public List<AirLineRoute> getRoutes() {
-        return routes;
-    }
-
-    public void setRoutes(List<AirLineRoute> routes) {
-        this.routes = routes;
-    }
-
     @Override
     public String toString() {
         return "AirLineRoutes{" +

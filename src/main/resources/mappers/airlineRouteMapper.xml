@@ -6,10 +6,19 @@
         <id property="routeId" column="airline_route_id"/>
         <result property="distanceMiles" column="distance_miles"/>
         <result property="priceDollars" column="price"/>
-        <association property="originLocation" column="origin_location_id" javaType="solvd.airline.dataaccess.model.Location.Location" resultMap="locationId"/>
-        <association property="destinationLocation" column="destination_location_id" javaType="solvd.airline.dataaccess.model.Location.Location" resultMap="locationId"/>
+        <association property="originLocation" resultMap="originLocationId"/>
+        <association property="destinationLocation" resultMap="destinationLocationId"/>
     </resultMap>
 
+    <resultMap id="originLocationId" type="solvd.airline.dataaccess.model.Location.Location">
+        <id property="locationId" column="origin_location_id"/>
+        <result property="locationName" column="origin_location_name"/>
+    </resultMap>
+
+    <resultMap id="destinationLocationId" type="solvd.airline.dataaccess.model.Location.Location">
+        <id property="locationId" column="destination_location_id"/>
+        <result property="locationName" column="destination_location_name"/>
+    </resultMap>
 
     <resultMap id="locationId" type="solvd.airline.dataaccess.model.Location.Location">
         <id property="locationId" column="location_id"/>
@@ -18,11 +27,24 @@
 
 
     <select id="getRoute" resultMap="AirLineRouteResult">
-        SELECT * FROM `airline_routes` WHERE `airline_route_id` = #{id}
+        SELECT ar.*,
+        lo1.location_id as 'origin_location_id', lo1.location_name as 'origin_location_name',
+        lo2.location_id as 'destination_location_id', lo2.location_name as 'destination_location_name'
+        FROM `airline_routes` ar
+        LEFT JOIN `locations` lo1 ON ar.origin_location_id = lo1.location_id
+        LEFT JOIN `locations` lo2 ON ar.destination_location_id = lo2.location_id
+        WHERE ar.`airline_route_id` = #{id}
     </select>
+
     <select id="getAllRoutes" resultMap="AirLineRouteResult">
-        SELECT * FROM `airline_routes`
+        SELECT ar.*,
+        lo1.location_id as 'origin_location_id', lo1.location_name as 'origin_location_name',
+        lo2.location_id as 'destination_location_id', lo2.location_name as 'destination_location_name'
+        FROM `airline_routes` ar
+        LEFT JOIN `locations` lo1 ON ar.origin_location_id = lo1.location_id
+        LEFT JOIN `locations` lo2 ON ar.destination_location_id = lo2.location_id
     </select>
+
     <update id="updateRoute" parameterType="solvd.airline.dataaccess.model.AirlineRoute.AirLineRoute">
         UPDATE `airline_routes` SET `origin_location_id` = #{originLocation.locationId}, `destination_location_id` = #{destinationLocation.locationId}, `distance_miles` = #{distanceMiles}, `price` = #{price} WHERE `airline_route_id` = #{routeId}
     </update>

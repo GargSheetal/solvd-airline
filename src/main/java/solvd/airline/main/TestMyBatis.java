@@ -18,12 +18,10 @@ public class TestMyBatis {
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 
 
-        // Obtain a SqlSession from the factory.
         try (SqlSession session = sqlSessionFactory.openSession()) {
-            // Now we can execute our mapper methods.
+
             AirLineRouteMapper mapper = session.getMapper(AirLineRouteMapper.class);
 
-            // For example, test the 'getRoute' operation.
             AirLineRoute route = mapper.getRoute(1);
             System.out.println(route);
 

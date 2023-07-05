@@ -10,9 +10,9 @@ import java.util.Objects;
 public class AirLineRoute {
     @XmlElement(name = "route_id")
     private int routeId;
-    @XmlElement(name = "origin_location_id")
+    @XmlElement(name = "origin_location")
     private Location originLocation;
-    @XmlElement(name = "destination_location_id")
+    @XmlElement(name = "destination_location")
     private Location destinationLocation;
     @XmlElement(name = "distance_miles")
     private int distanceMiles;
@@ -78,11 +78,11 @@ public class AirLineRoute {
     public String toString() {
         return "\nAirLineRoute{" +
                 "routeId=" + routeId +
-                ", originLocationId=" + (originLocation != null ? originLocation.getLocationId() : null) +
-                ", destinationLocationId=" + (destinationLocation != null ? destinationLocation.getLocationId() : null) +
+                ", originLocation=" + originLocation +
+                ", destinationLocation=" + destinationLocation +
                 ", distanceMiles=" + distanceMiles +
                 ", priceDollars=" + priceDollars +
-                "}";
+                '}';
     }
 
 
