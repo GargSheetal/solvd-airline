@@ -1,1 +1,58 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="solvd.airline.dataaccess.model.AirlineRoute.AirLineRouteMapper">
+
+    <resultMap id="AirLineRouteResult" type="solvd.airline.dataaccess.model.AirlineRoute.AirLineRoute">
+        <id property="routeId" column="airline_route_id"/>
+        <result property="distanceMiles" column="distance_miles"/>
+        <result property="priceDollars" column="price"/>
+        <association property="originLocation" resultMap="originLocationId"/>
+        <association property="destinationLocation" resultMap="destinationLocationId"/>
+    </resultMap>
+
+    <resultMap id="originLocationId" type="solvd.airline.dataaccess.model.Location.Location">
+        <id property="locationId" column="origin_location_id"/>
+        <result property="locationName" column="origin_location_name"/>
+    </resultMap>
+
+    <resultMap id="destinationLocationId" type="solvd.airline.dataaccess.model.Location.Location">
+        <id property="locationId" column="destination_location_id"/>
+        <result property="locationName" column="destination_location_name"/>
+    </resultMap>
+
+    <resultMap id="locationId" type="solvd.airline.dataaccess.model.Location.Location">
+        <id property="locationId" column="location_id"/>
+        <result property="locationName" column="location_name"/>
+    </resultMap>
+
+
+    <select id="getRoute" resultMap="AirLineRouteResult">
+        SELECT ar.*,
+        lo1.location_id as 'origin_location_id', lo1.location_name as 'origin_location_name',
+        lo2.location_id as 'destination_location_id', lo2.location_name as 'destination_location_name'
+        FROM `airline_routes` ar
+        LEFT JOIN `locations` lo1 ON ar.origin_location_id = lo1.location_id
+        LEFT JOIN `locations` lo2 ON ar.destination_location_id = lo2.location_id
+        WHERE ar.`airline_route_id` = #{id}
+    </select>
+
+    <select id="getAllRoutes" resultMap="AirLineRouteResult">
+        SELECT ar.*,
+        lo1.location_id as 'origin_location_id', lo1.location_name as 'origin_location_name',
+        lo2.location_id as 'destination_location_id', lo2.location_name as 'destination_location_name'
+        FROM `airline_routes` ar
+        LEFT JOIN `locations` lo1 ON ar.origin_location_id = lo1.location_id
+        LEFT JOIN `locations` lo2 ON ar.destination_location_id = lo2.location_id
+    </select>
+
+    <update id="updateRoute" parameterType="solvd.airline.dataaccess.model.AirlineRoute.AirLineRoute">
+        UPDATE `airline_routes` SET `origin_location_id` = #{originLocation.locationId}, `destination_location_id` = #{destinationLocation.locationId}, `distance_miles` = #{distanceMiles}, `price` = #{price} WHERE `airline_route_id` = #{routeId}
+    </update>
+    <delete id="deleteRoute" parameterType="int">
+        DELETE FROM `airline_routes` WHERE `airline_route_id` = #{id}
+    </delete>
+    <insert id="addRoute" parameterType="solvd.airline.dataaccess.model.AirlineRoute.AirLineRoute">
+        INSERT INTO `airline_routes`(`origin_location_id`, `destination_location_id`, `distance_miles`, `price`) VALUES (#{originLocation.locationId}, #{destinationLocation.locationId}, #{distanceMiles}, #{price})
+    </insert>
+
+</mapper>
