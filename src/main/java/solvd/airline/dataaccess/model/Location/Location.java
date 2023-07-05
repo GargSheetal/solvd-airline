@@ -13,10 +13,20 @@ public class Location {
 
     public Location() {
     }
+    public Location(int locationId) {
+        this.locationId = locationId;
+    }
+
+    public Location(int locationId, String locationName) {
+        this.locationId = locationId;
+        this.locationName = locationName;
+    }
 
     public Location(String locationName) {
         this.locationName = locationName;
     }
+
+
     @XmlElement(name = "location_id")
     public int getLocationId() {
         return locationId;
