@@ -23,8 +23,7 @@ public class AirLineRoute {
 
     }
 
-    public AirLineRoute(int routeId, Location originLocation, Location destinationLocation, int distanceMiles, double priceDollars) {
-        this.routeId = routeId;
+    public AirLineRoute(Location originLocation, Location destinationLocation, int distanceMiles, double priceDollars) {
         this.originLocation = originLocation;
         this.destinationLocation = destinationLocation;
         this.distanceMiles = distanceMiles;
