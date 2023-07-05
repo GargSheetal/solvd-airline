@@ -84,8 +84,8 @@ public class AirLineRoute {
     public String toString() {
         return "\nAirLineRoute{" +
                 "routeId=" + routeId +
-                ", originLocation=" + originLocation +
-                ", destinationLocation=" + destinationLocation +
+                ", originLocationId=" + (originLocation != null ? originLocation.getLocationId() : null) +
+                ", destinationLocationId=" + (destinationLocation != null ? destinationLocation.getLocationId() : null) +
                 ", distanceMiles=" + distanceMiles +
                 ", priceDollars=" + priceDollars +
                 '}';

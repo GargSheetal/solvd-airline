@@ -45,8 +45,8 @@
         LEFT JOIN locations lo2 ON ar.destination_location_id = lo2.location_id
     </select>
 
-    <select id="getRouteWithoutJoin" resultMap="airLineRouteResult">
-        SELECT * FROM airline_routes WHERE airline_route_id = #{id}
+    <select id="getAllRouteWithoutJoin" resultMap="airLineRouteResult">
+        SELECT * FROM airline_routes
     </select>
 
     <update id="updateRoute" parameterType="solvd.airline.dataaccess.model.AirlineRoute.AirLineRoute">

@@ -25,6 +25,11 @@ public class TestMyBatis {
             AirLineRoute route = mapper.getRoute(1);
             System.out.println(route);
 
+            List<AirLineRoute> routesWithoutJoin = mapper.getAllRouteWithoutJoin();
+            for (AirLineRoute routeWithoutJoin : routesWithoutJoin){
+                System.out.println(routeWithoutJoin);
+            }
+
             List<AirLineRoute> allRoute = mapper.getAllRoutes();
             for (AirLineRoute airLineRoute : allRoute){
                 System.out.println(airLineRoute);
