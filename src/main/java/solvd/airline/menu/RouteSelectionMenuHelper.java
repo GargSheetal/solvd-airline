@@ -108,36 +108,6 @@ public class RouteSelectionMenuHelper {
 		}
 	}
 
-//	private void setRouteMatrix() {
-//		// Initialize distance, price, and nextLocationIdx matrices
-//		for(int i=0; i<numLocations; i++) {
-//			Arrays.fill(distance[i], INF);
-//			Arrays.fill(price[i], INF);
-//			Arrays.fill(nextLocationIdx[i], -1);
-//		}
-//
-//		// Populate distance, price, and nextLocationIdx matrices with input data
-//		for(AirLineRoute route: airlineRouteList) {
-//			int airlineLocationId = route.getRouteId();
-//			int originLocationId = route.getOriginLocation().getLocationId();
-//			int destinationLocationId = route.getDestinationLocation().getLocationId();
-//			int distanceMiles = route.getDistanceMiles();
-//			double priceDollars = route.getPriceDollars();
-//
-//			int originLocationIdx = getLocationIndex(originLocationId);
-//			int destinationLocationIdx = getLocationIndex(destinationLocationId);
-//
-//			distance[originLocationIdx][destinationLocationIdx] = distanceMiles;
-//			distance[destinationLocationIdx][originLocationIdx] = distanceMiles;
-//
-//			price[originLocationIdx][destinationLocationIdx] = priceDollars;
-//			price[destinationLocationIdx][originLocationIdx] = priceDollars;
-//
-//			nextLocationIdx[originLocationIdx][destinationLocationIdx] = destinationLocationIdx;
-//			nextLocationIdx[destinationLocationIdx][originLocationIdx] = originLocationIdx;  // ckeck this for debugging
-//		}
-//	}
-
 	private void setRouteMatrix() {
 		// Initialize distance, price, and nextLocationIdx matrices
 		for(int i=0; i<numLocations; i++) {
@@ -158,10 +128,17 @@ public class RouteSelectionMenuHelper {
 			int destinationLocationIdx = getLocationIndex(destinationLocationId);
 
 			distance[originLocationIdx][destinationLocationIdx] = distanceMiles;
+			distance[destinationLocationIdx][originLocationIdx] = distanceMiles;
+
 			price[originLocationIdx][destinationLocationIdx] = priceDollars;
+			price[destinationLocationIdx][originLocationIdx] = priceDollars;
+
+//			nextLocationIdx[destinationLocationIdx][originLocationIdx] = originLocationIdx;
 			nextLocationIdx[originLocationIdx][destinationLocationIdx] = destinationLocationIdx;
 		}
 	}
+
+
 
 
 	private int getLocationIndex(int locationId) {
