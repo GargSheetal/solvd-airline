@@ -1,4 +1,4 @@
-package solvd.airline.dataaccess.model.location;
+package solvd.airline.dataaccess.model.Location;
 public class Location {
     private int locationId;
     private String locationName;

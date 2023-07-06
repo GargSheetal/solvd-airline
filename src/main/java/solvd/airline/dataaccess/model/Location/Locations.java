@@ -1,4 +1,4 @@
-package solvd.airline.dataaccess.model.location;
+package solvd.airline.dataaccess.model.Location;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -3,8 +3,8 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import solvd.airline.dataaccess.model.location.Location;
-import solvd.airline.dataaccess.model.location.LocationMapper;
+import solvd.airline.dataaccess.model.Location.Location;
+import solvd.airline.dataaccess.model.Location.LocationMapper;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -1,5 +1,5 @@
 package solvd.airline.menu;
-import solvd.airline.dataaccess.model.location.Location;
+import solvd.airline.dataaccess.model.Location.Location;
 import solvd.airline.dataaccess.service.LocationMyBatisService;
 import java.util.Scanner;
 
