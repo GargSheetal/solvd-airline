@@ -31,19 +31,19 @@ public class RouteSelectionMenu {
 			int option = 0;
 			do {
 				try {
-					System.out.println("Please choose an option:");
-					System.out.println("1. Check routes");
-					System.out.println("2. Exit");
+					logger.info("Please choose an option:");
+					logger.info("1. Check routes");
+					logger.info("2. Exit");
 					option = scanner.nextInt();
 
 					if (option == 1) {
 						checkRoutes();
 					} else if (option != 2) {
-						System.out.println("Invalid option, please enter 1 to check routes or 2 to exit.");
+						logger.info("Invalid option, please enter 1 to check routes or 2 to exit.");
 					}
 				} catch (Exception e) {
 					logger.error("An error occurred during user input", e);
-					System.out.println("Invalid input, please try again.");
+					logger.info("Invalid input, please try again.");
 				}
 			} while (option != 2);
 		} catch (IOException e) {
@@ -64,20 +64,20 @@ public class RouteSelectionMenu {
 			int originId = requestPrompt("Please enter your current location id:");
 			int destinationId = requestPrompt("Please enter your destination location id:");
 
-			System.out.println("Please choose an option:");
-			System.out.println("1. Fastest route");
-			System.out.println("2. Cheapest route");
+			logger.info("Please choose an option:");
+			logger.info("1. Fastest route");
+			logger.info("2. Cheapest route");
 
 			int option = scanner.nextInt();
 
 			if (option == 1 || option == 2) {
 				routeSelectionMenu.getItineraryQueryResult(originId, destinationId);
 			} else {
-				System.out.println("Invalid option, please enter 1 for fastest route or 2 for cheapest route.");
+				logger.info("Invalid option, please enter 1 for fastest route or 2 for cheapest route.");
 			}
 		} catch (Exception e) {
 			logger.error("An error occurred during route selection", e);
-			System.out.println("An error occurred, please try again.");
+			logger.info("An error occurred, please try again.");
 		}
 	}
 

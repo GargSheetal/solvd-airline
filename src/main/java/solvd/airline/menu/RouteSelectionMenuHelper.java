@@ -133,7 +133,7 @@ public class RouteSelectionMenuHelper {
 			price[originLocationIdx][destinationLocationIdx] = priceDollars;
 			price[destinationLocationIdx][originLocationIdx] = priceDollars;
 
-//			nextLocationIdx[destinationLocationIdx][originLocationIdx] = originLocationIdx;
+			nextLocationIdx[destinationLocationIdx][originLocationIdx] = originLocationIdx;
 			nextLocationIdx[originLocationIdx][destinationLocationIdx] = destinationLocationIdx;
 		}
 	}
