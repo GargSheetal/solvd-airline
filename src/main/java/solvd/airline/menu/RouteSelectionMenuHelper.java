@@ -61,7 +61,11 @@ public class RouteSelectionMenuHelper {
 
 		for (int mrow = 0; mrow < matrix.length; mrow++) {
 			for (int mcol = 0; mcol < matrix[0].length; mcol++) {
-				display[mrow + 1][mcol + 1] = String.format("%-15s", matrix[mrow][mcol]);
+				if (matrix[mrow][mcol] == INF) {
+					display[mrow + 1][mcol + 1] = String.format("%-15s", "∞"); 
+				} else {
+					display[mrow + 1][mcol + 1] = String.format("%-15s", matrix[mrow][mcol]);
+				}
 			}
 		}
 
@@ -86,7 +90,11 @@ public class RouteSelectionMenuHelper {
 
 		for (int mrow = 0; mrow < matrix.length; mrow++) {
 			for (int mcol = 0; mcol < matrix[0].length; mcol++) {
-				display[mrow + 1][mcol + 1] = String.format("%-15s", matrix[mrow][mcol]);
+				if (matrix[mrow][mcol] == INF) {
+					display[mrow + 1][mcol + 1] = String.format("%-15s", "∞"); 
+				} else {
+					display[mrow + 1][mcol + 1] = String.format("%-15s", matrix[mrow][mcol]);
+				}
 			}
 		}
 
