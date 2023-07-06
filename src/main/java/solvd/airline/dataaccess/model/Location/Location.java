@@ -1,8 +1,20 @@
 package solvd.airline.dataaccess.model.Location;
-public class Location {
-    private int locationId;
-    private String locationName;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement(name = "location")
+@XmlAccessorType(XmlAccessType.FIELD)
+public class Location {
+    @XmlElement(name = "location_id")
+    @JsonProperty("location_id")
+    private int locationId;
+
+    @XmlElement(name = "location_name")
+    @JsonProperty("location_name")
+    private String locationName;
     public Location() {
     }
 
