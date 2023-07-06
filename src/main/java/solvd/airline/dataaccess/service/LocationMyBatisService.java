@@ -35,17 +35,14 @@ public class LocationMyBatisService {
 
     public void updateLocation(Location location) {
         locationMapper.updateLocation(location);
-        sqlSession.commit();
     }
 
     public void deleteLocation(int id) {
         locationMapper.deleteLocation(id);
-        sqlSession.commit();
     }
 
     public void addLocation(Location location) {
         locationMapper.addLocation(location);
-        sqlSession.commit();
     }
 
     public void closeSession() {
