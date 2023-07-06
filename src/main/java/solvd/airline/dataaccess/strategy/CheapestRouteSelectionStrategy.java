@@ -8,9 +8,7 @@ public class CheapestRouteSelectionStrategy implements RouteSelectionStrategy {
 	private double[][] price;
 	private int[][] nextLocationIdx;
 	
-	public CheapestRouteSelectionStrategy(int numLocations, int[][] distance, double[][] price,
-			int[][] nextLocationIdx) {
-		super();
+	public CheapestRouteSelectionStrategy(int numLocations, int[][] distance, double[][] price, int[][] nextLocationIdx) {
 		this.numLocations = numLocations;
 		this.distance = distance;
 		this.price = price;
@@ -24,7 +22,7 @@ public class CheapestRouteSelectionStrategy implements RouteSelectionStrategy {
 		for(int k=0; k<numLocations; k++) {
 			for(int i=0; i<numLocations; i++) {
 				for(int j=0; j<numLocations; j++) {
-					if(price[i][k] != INF && price[k][j] != INF) {
+					if(i != j && price[i][k] != INF && price[k][j] != INF) {
 						if(price[i][j] > price[i][k] + price[k][j]) {
 							price[i][j] = price[i][k] + price[k][j];
 							distance[i][j] = distance[i][k] + distance[k][j];

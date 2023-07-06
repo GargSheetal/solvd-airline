@@ -1,6 +1,5 @@
 package solvd.airline.dataaccess.model.AirlineRoute;
 
-import org.apache.ibatis.annotations.*;
 import java.util.List;
 
 public interface AirLineRouteMapper {

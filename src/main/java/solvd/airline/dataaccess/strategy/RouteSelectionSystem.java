@@ -8,24 +8,24 @@ public class RouteSelectionSystem {
 		this.routeSelectionStrategy = routeSelectionStrategy;
 	}
 	
-	public void getDistanceMatrix() {
+	public int[][] getDistanceMatrix() {
 		if(routeSelectionStrategy == null) {
 			throw new Error("No Route Selection strategy is set. Please set a route strategy.");
 		}
-		routeSelectionStrategy.getDistanceMatrix();
+		return routeSelectionStrategy.getDistanceMatrix();
 	}
 	
-	public void getPriceMatrix() {
+	public double[][] getPriceMatrix() {
 		if(routeSelectionStrategy == null) {
 			throw new Error("No Route Selection strategy is set. Please set a route strategy.");
 		}
-		routeSelectionStrategy.getPriceMatrix();
+		return routeSelectionStrategy.getPriceMatrix();
 	}
 	
-	public void getNextLocationIdxMatrix() {
+	public int[][] getNextLocationIdxMatrix() {
 		if(routeSelectionStrategy == null) {
 			throw new Error("No Route Selection strategy is set. Please set a route strategy.");
 		}
-		routeSelectionStrategy.getNextLocationIdxMatrix();
+		return routeSelectionStrategy.getNextLocationIdxMatrix();
 	}
 }
