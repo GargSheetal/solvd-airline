@@ -42,12 +42,12 @@ public class RouteSelectionMenuHelper {
 		printDoubleMatrix("Price (from DB)", locationNames, price);
 		
 		cheapestRoute.setRouteSelectionStrategy(new CheapestRouteSelectionStrategy(numLocations, distance, price, nextLocationIdx));
-//		printIntMatrix("Distance (cheapest)", locationNames, cheapestRoute.getDistanceMatrix());
-//		printDoubleMatrix("Price (cheapest)", locationNames, cheapestRoute.getPriceMatrix());
+		printIntMatrix("Distance (cheapest)", locationNames, cheapestRoute.getDistanceMatrix());
+		printDoubleMatrix("Price (cheapest)", locationNames, cheapestRoute.getPriceMatrix());
 
 		shortestRoute.setRouteSelectionStrategy(new ShortestRouteSelectionStrategy(numLocations, distance, price, nextLocationIdx));
-//		printIntMatrix("Distance (shortest)", locationNames, shortestRoute.getDistanceMatrix());
-//		printDoubleMatrix("Price (shortest)", locationNames, shortestRoute.getPriceMatrix());
+		printIntMatrix("Distance (shortest)", locationNames, shortestRoute.getDistanceMatrix());
+		printDoubleMatrix("Price (shortest)", locationNames, shortestRoute.getPriceMatrix());
 	}
 	
 	private void printIntMatrix(String label, String[] header, int[][] matrix) {

@@ -7,6 +7,7 @@ public class LocationManagementMenu {
     private final LocationMyBatisService locationMyBatisService;
     private final Scanner scanner;
 
+
     public void start() {
         boolean exit = false;
         while (!exit) {
