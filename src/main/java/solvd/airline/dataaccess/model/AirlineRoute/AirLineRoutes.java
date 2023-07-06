@@ -10,10 +10,15 @@ import java.util.stream.Collectors;
 @XmlRootElement(name = "airline_routes")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class AirLineRoutes {
+	
     @XmlElement(name = "airline_route")
     private List<AirLineRoute> routes;
 
-    @Override
+    public List<AirLineRoute> getRoutes() {
+		return routes;
+	}
+    
+	@Override
     public String toString() {
         return "AirLineRoutes{" +
                 "routes=" + routes.stream().map(AirLineRoute::toString).collect(Collectors.joining(", ")) +
