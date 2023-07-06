@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="solvd.airline.dataaccess.model.AirlineRoute.AirLineRouteMapper">
 
     <resultMap id="airLineRouteResult" type="solvd.airline.dataaccess.model.AirlineRoute.AirLineRoute">
@@ -58,5 +59,4 @@
     <insert id="addRoute" parameterType="solvd.airline.dataaccess.model.AirlineRoute.AirLineRoute">
         INSERT INTO airline_routes(origin_location_id, destination_location_id, distance_miles, price) VALUES (#{originLocation.locationId}, #{destinationLocation.locationId}, #{distanceMiles}, #{priceDollars})
     </insert>
-
 </mapper>
