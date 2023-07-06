@@ -5,7 +5,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import solvd.airline.dataaccess.model.AirlineRoute.AirLineRoute;
 import solvd.airline.dataaccess.model.AirlineRoute.AirLineRouteMapper;
-import solvd.airline.dataaccess.model.Location.Location;
 
 import java.util.InputMismatchException;
 import java.util.List;
@@ -15,12 +14,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import solvd.airline.main.Main;
 
-public class AirLineRouteMenu {
+public class AirLineRouteMenuHelper {
 
     private final SqlSessionFactory sqlSessionFactory;
     private static final Logger logger = LogManager.getLogger(Main.class);
 
-    public AirLineRouteMenu(SqlSessionFactory sqlSessionFactory) {
+    public AirLineRouteMenuHelper(SqlSessionFactory sqlSessionFactory) {
         this.sqlSessionFactory = sqlSessionFactory;
     }
 
