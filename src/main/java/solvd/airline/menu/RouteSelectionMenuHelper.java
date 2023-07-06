@@ -42,12 +42,12 @@ public class RouteSelectionMenuHelper {
 		printDoubleMatrix("Price (from DB)", locationNames, price);
 		
 		cheapestRoute.setRouteSelectionStrategy(new CheapestRouteSelectionStrategy(numLocations, distance, price, nextLocationIdx));
-		printIntMatrix("Distance (cheapest)", locationNames, cheapestRoute.getDistanceMatrix());
-		printDoubleMatrix("Price (cheapest)", locationNames, cheapestRoute.getPriceMatrix());
-		
+//		printIntMatrix("Distance (cheapest)", locationNames, cheapestRoute.getDistanceMatrix());
+//		printDoubleMatrix("Price (cheapest)", locationNames, cheapestRoute.getPriceMatrix());
+
 		shortestRoute.setRouteSelectionStrategy(new ShortestRouteSelectionStrategy(numLocations, distance, price, nextLocationIdx));
-		printIntMatrix("Distance (shortest)", locationNames, shortestRoute.getDistanceMatrix());
-		printDoubleMatrix("Price (shortest)", locationNames, shortestRoute.getPriceMatrix());
+//		printIntMatrix("Distance (shortest)", locationNames, shortestRoute.getDistanceMatrix());
+//		printDoubleMatrix("Price (shortest)", locationNames, shortestRoute.getPriceMatrix());
 	}
 	
 	private void printIntMatrix(String label, String[] header, int[][] matrix) {
@@ -62,7 +62,7 @@ public class RouteSelectionMenuHelper {
 		for (int mrow = 0; mrow < matrix.length; mrow++) {
 			for (int mcol = 0; mcol < matrix[0].length; mcol++) {
 				if (matrix[mrow][mcol] == INF) {
-					display[mrow + 1][mcol + 1] = String.format("%-15s", "∞"); 
+					display[mrow + 1][mcol + 1] = String.format("%-15s", "Not Available");
 				} else {
 					display[mrow + 1][mcol + 1] = String.format("%-15s", matrix[mrow][mcol]);
 				}
@@ -91,7 +91,7 @@ public class RouteSelectionMenuHelper {
 		for (int mrow = 0; mrow < matrix.length; mrow++) {
 			for (int mcol = 0; mcol < matrix[0].length; mcol++) {
 				if (matrix[mrow][mcol] == INF) {
-					display[mrow + 1][mcol + 1] = String.format("%-15s", "∞"); 
+					display[mrow + 1][mcol + 1] = String.format("%-15s", "Not Available");
 				} else {
 					display[mrow + 1][mcol + 1] = String.format("%-15s", matrix[mrow][mcol]);
 				}
@@ -225,13 +225,13 @@ class ItineraryQueryResult {
 	public Itinerary getShortestItinerary() {
 		return shortestItinerary;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Origin = " + originLocation.getLocationName() 
-			+ " | Destination = " + destinationLocation.getLocationName()
-			+ "\n[Cheapest Itinerary] " + cheapestItinerary.toString()
-			+ "\n[Shortest Itinerary] " + shortestItinerary.toString();
+		return "Origin = " + originLocation.getLocationName()
+				+ " | Destination = " + destinationLocation.getLocationName()
+				+ "\n[Cheapest Itinerary] " + (cheapestItinerary == null ? "No route found" : cheapestItinerary.toString())
+				+ "\n[Shortest Itinerary] " + (shortestItinerary == null ? "No route found" : shortestItinerary.toString());
 	}
 }
 
@@ -269,63 +269,3 @@ class Itinerary {
 	}
 }
 
-
-////to be replaced by respective model class
-//class AirlineRoute {
-//
-//private int airlineRouteId;
-//private int originLocationId;
-//private int destinationLocationId;
-//private int distanceMiles;
-//private int priceDollars;
-//
-//public AirlineRoute(int airlineRouteId, int originLocationId, int destinationLocationId, int distanceMiles, int priceDollars) {
-//
-//	this.airlineRouteId = airlineRouteId;
-//	this.originLocationId = originLocationId;
-//	this.destinationLocationId = destinationLocationId;
-//	this.distanceMiles = distanceMiles;
-//	this.priceDollars = priceDollars;
-//}
-//
-//public int getAirlineRouteId() {
-//	return airlineRouteId;
-//}
-//
-//public int getOriginLocationId() {
-//	return originLocationId;
-//}
-//
-//public int getDestinationLocationId() {
-//	return destinationLocationId;
-//}
-//
-//public int getDistanceMiles() {
-//	return distanceMiles;
-//}
-//
-//public int getPriceDollars() {
-//	return priceDollars;
-//}
-//}
-
-////to be replaced by respective model class
-//class Location {
-//
-//private int locationId;
-//private String locationName;
-//
-//public Location(int locationId, String locationName) {
-//	this.locationId = locationId;
-//	this.locationName = locationName;
-//}
-//
-//public int getLocationId() {
-//	return locationId;
-//}
-//
-//public String getLocationName() {
-//	return locationName;
-//}
-//
-//}

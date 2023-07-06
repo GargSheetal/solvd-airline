@@ -23,43 +23,6 @@ public class AirLineRouteMenuHelper {
         this.sqlSessionFactory = sqlSessionFactory;
     }
 
-    public void start() {
-        try (SqlSession session = sqlSessionFactory.openSession()) {
-            AirLineRouteMapper mapper = session.getMapper(AirLineRouteMapper.class);
-            Scanner scanner = new Scanner(System.in);
-
-            while (true) {
-                try {
-                    logger.info("---------------------------------------------------");
-                    logger.info("Select an option:");
-                    logger.info("1. View all routes");
-                    logger.info("2. View a specific route");
-                    logger.info("3. Exit");
-                    logger.info("---------------------------------------------------");
-
-                    int choice = scanner.nextInt();
-                    scanner.nextLine();
-
-                    switch (choice) {
-                        case 1 -> viewAllRoutes(mapper);
-
-                        case 2 -> viewSpecificRoute(mapper, scanner);
-
-                        case 3 -> {
-                            return;
-                        }
-                        default -> logger.info("Invalid choice, please try again.");
-                    }
-                } catch (InputMismatchException e) {
-                    logger.info("Invalid input. Please enter a number.");
-                    scanner.nextLine();
-                } catch (PersistenceException e) {
-                    logger.info("Database operation failed: " + e.getMessage());
-                }
-            }
-        }
-    }
-
 
     private void viewAllRoutes(AirLineRouteMapper mapper) {
         logger.info("\n>>> All Airline Routes:");
