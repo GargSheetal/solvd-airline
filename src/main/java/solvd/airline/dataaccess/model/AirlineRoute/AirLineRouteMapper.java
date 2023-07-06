@@ -8,6 +8,8 @@ public interface AirLineRouteMapper {
 
     List<AirLineRoute> getAllRoutes();
 
+    List<AirLineRoute> getAllRouteWithoutJoin();
+
     void updateRoute(AirLineRoute route);
 
     void deleteRoute(int id);
