@@ -1,5 +1,6 @@
 package solvd.airline.menu;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ import solvd.airline.dataaccess.model.AirlineRoute.AirLineRoute;
 import solvd.airline.dataaccess.model.Location.Location;
 import solvd.airline.dataaccess.service.AirLineRouteMybatisService;
 import solvd.airline.dataaccess.service.LocationMyBatisService;
+import solvd.airline.output.JsonParser;
 
 public class RouteSelectionMenu {
 	
@@ -41,6 +43,7 @@ public class RouteSelectionMenu {
 		System.out.println("*******************");
 		System.out.println("\n-- Input Options --\n");
 		printLocationList();	// to provide input options to the user
+		JsonParser.saveDataToJson(locationList, "sampleOutput.json");       
 		int originLocationId = requestInt("\nEnter Origin Location Id :");
 		int destinationLocationId = requestInt("Enter Destination Location Id :");
 		ItineraryQueryResult itineraryQueryResult = routeSelectionMenuHelper.getItineraryQueryResult(originLocationId, destinationLocationId);	
@@ -70,12 +73,12 @@ public class RouteSelectionMenu {
 		
 		switch(selectedRoute) {
 		case 1 : logger.info("\n-- Selected Itinerary --\n\n" + itineraryQueryResult.toStringCheapest());
-				System.out.println("\n\nGo back to main menu - to be implemented"); break;
+				 logger.info("\n\nGo back to main menu - to be implemented"); break;
 		case 2 : logger.info("\n-- Selected Itinerary --\n\n" + itineraryQueryResult.toStringShortest());
-				System.out.println("\n\nGo back to main menu - to be implemented"); break;
-		case 3 : System.out.println("\nGo back to main menu - to be implemented"); break;	// replace with mainMenu method (to be implemented)
-		case 4 : System.out.println("\nYou are exiting the app..."); break;
-		default : System.out.println("\nPlease enter a valid input..."); routeSelectionInput(itineraryQueryResult);
+				 logger.info("\n\nGo back to main menu - to be implemented"); break;
+		case 3 : logger.info("\nGo back to main menu - to be implemented"); break;	// replace with mainMenu method (to be implemented)
+		case 4 : logger.info("\nYou are exiting the app..."); break;
+		default : logger.info("\nPlease enter a valid input..."); routeSelectionInput(itineraryQueryResult);
 		}
 	}
 	
