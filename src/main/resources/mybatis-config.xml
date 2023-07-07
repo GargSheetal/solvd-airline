@@ -16,6 +16,7 @@
     </environment>
   </environments>
   <mappers>
-    <mapper resource="mappers/locationMapper.xml"/>
+      <mapper resource="mappers/airlineRouteMapper.xml"/>
+      <mapper resource="mappers/locationMapper.xml"/>
   </mappers>
 </configuration>
