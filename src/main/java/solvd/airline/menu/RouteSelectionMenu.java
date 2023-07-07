@@ -11,37 +11,65 @@ import org.apache.logging.log4j.Logger;
 import solvd.airline.dataaccess.model.AirlineRoute.AirLineRoute;
 
 import solvd.airline.dataaccess.model.Location.Location;
+import solvd.airline.dataaccess.service.AirLineRouteMybatisService;
+import solvd.airline.dataaccess.service.LocationMyBatisService;
 
 public class RouteSelectionMenu {
 	
 	private static final Logger logger = LogManager.getLogger(RouteSelectionMenu.class);
 	private static Scanner scanner = new Scanner(System.in);
-	private static RouteSelectionMenuHelper routeSelectionMenu;
+	private static RouteSelectionMenuHelper routeSelectionMenuHelper;
+	private static LocationMyBatisService locationMyBatisService = new LocationMyBatisService();
+	private static AirLineRouteMybatisService airLineRouteMybatisService = new AirLineRouteMybatisService();
 	
 	private static List<Location> locationList = new ArrayList<>();
 	private static List<AirLineRoute> airlineRouteList = new ArrayList<>();
 	
 	public static void launch() throws IOException {
 		loadData();
-		routeSelectionMenu = new RouteSelectionMenuHelper(locationList, airlineRouteList);
-//		AirLineRouteMybatisService airLineRouteMybatisService = new AirLineRouteMybatisService();
-//		logger.info("Presenting All Routes : \n");
-//		List<AirLineRoute> airlineRouteList = airLineRouteMybatisService.getAllRoutes();
-//		airlineRouteList.forEach(airlineRoute -> System.out.println(airlineRoute));
-		
-		int originLocationId = requestPrompt("\nEnter Origin Location Id :");
-		int destinationLocationId = requestPrompt("Enter Destination Location Id :");
-		routeSelectionMenu.getItineraryQueryResult(originLocationId, destinationLocationId);	
+//		loadTestData();
+		routeSelectionMenuHelper = new RouteSelectionMenuHelper(locationList, airlineRouteList);
+		ItineraryQueryResult itineraryQueryResult = queryItinerary();
+		logger.info("\n\nItinerary Query Result : -->\n" + itineraryQueryResult.toString());
+		routeSelectionInput(itineraryQueryResult);
 	}
 	
-	public static int requestPrompt(String prompt) {
+	private static ItineraryQueryResult queryItinerary() {
+		int originLocationId = requestInt("\nEnter Origin Location Id :");
+		int destinationLocationId = requestInt("Enter Destination Location Id :");
+		ItineraryQueryResult itineraryQueryResult = routeSelectionMenuHelper.getItineraryQueryResult(originLocationId, destinationLocationId);	
+		return itineraryQueryResult;
+	}
+	
+	private static int requestInt(String prompt) {
 		logger.info(prompt);
 		int id = scanner.nextInt();
 		return id;
 	}
 	
+	private static void routeSelectionInput(ItineraryQueryResult itineraryQueryResult){
+		logger.info("\n\n ************ Presenting Route Selection Menu ************ ");
+		logger.info("\n 1. Select Cheapest Route");
+		logger.info("\n 2. Select Shortest Route");
+		logger.info("\n 3. Go back to Main Menu");
+		logger.info("\n 4. Exit");
+		int selectedRoute = requestInt("\nSelect a Route :");
+		
+		switch(selectedRoute) {
+		case 1 : logger.info(itineraryQueryResult.toStringCheapest()); break;
+		case 2 : logger.info(itineraryQueryResult.toStringShortest()); break;
+		case 3 : System.out.println("\nGo back to main menu - to be implemented"); break;	// replace with mainMenu method (to be implemented)
+		case 4 : System.out.println("\nYou are exiting the app..."); break;
+		default : System.out.println("\nPlease enter a valid input..."); routeSelectionInput(itineraryQueryResult);
+		}
+	}
+	
 	private static void loadData() {
-		// to be replaced by LocationService
+		locationList = locationMyBatisService.getAllLocations();
+		airlineRouteList = airLineRouteMybatisService.getAllRoutes();		
+	}
+	
+	private static void loadTestData() {
 		Location miami = new Location(10, "Miami");
 		Location newyork = new Location(20, "Newyork");
 		Location dallas = new Location(30, "Dallas");
@@ -53,7 +81,7 @@ public class RouteSelectionMenu {
 		locationList.add(dallas);
 		locationList.add(chicago);
 		locationList.add(atlanta);
-		// to be replaced by AirlineRouteService
+		
 		airlineRouteList.add(new AirLineRoute(1, miami, newyork, 500, 600));
 		airlineRouteList.add(new AirLineRoute(2, newyork, dallas, 200, 300));
 		airlineRouteList.add(new AirLineRoute(3, dallas, chicago, 100, 200));
@@ -61,4 +89,5 @@ public class RouteSelectionMenu {
 		airlineRouteList.add(new AirLineRoute(5, atlanta, miami, 300, 400));
 		airlineRouteList.add(new AirLineRoute(6, chicago, newyork, 600, 700));
 	}
+	
 }
