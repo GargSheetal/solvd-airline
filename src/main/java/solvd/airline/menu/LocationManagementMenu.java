@@ -1,115 +1,95 @@
 package solvd.airline.menu;
 import solvd.airline.dataaccess.model.Location.Location;
 import solvd.airline.dataaccess.service.LocationMyBatisService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import java.sql.SQLException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class LocationManagementMenu {
+    public static final Logger logger = LogManager.getLogger(LocationManagementMenu.class);
     private final LocationMyBatisService locationMyBatisService;
     private final Scanner scanner;
-
-
-    public void start() {
-        boolean exit = false;
-        while (!exit) {
-            System.out.println("=== Location Management Menu ===");
-            System.out.println("1. Add Location");
-            System.out.println("2. View All Locations");
-            System.out.println("3. Find Location by ID");
-            System.out.println("4. Update Location");
-            System.out.println("5. Delete Location");
-            System.out.println("0. Exit");
-
-            int choice = getUserChoice();
-            switch (choice) {
-                case 1:
-                    addLocation();
-                    break;
-                case 2:
-                    viewAllLocations();
-                    break;
-                case 3:
-                    findLocationById();
-                    break;
-                case 4:
-                    updateLocation();
-                    break;
-                case 5:
-                    deleteLocation();
-                    break;
-                case 0:
-                    exit = true;
-                    break;
-                default:
-                    System.out.println("Invalid choice. Please try again.");
-            }
-        }
-    }
-
-    private int getUserChoice() {
-        System.out.print("Enter your choice: ");
-        return scanner.nextInt();
-    }
-
-    private void addLocation() {
-        scanner.nextLine(); // Consume the newline character
-        System.out.println("Enter location name:");
-        String locationName = scanner.nextLine();
-        Location location = new Location(locationName);
-        locationMyBatisService.addLocation(location);
-        System.out.println("Location added successfully!");
-    }
-
     public LocationManagementMenu(LocationMyBatisService locationMyBatisService) {
         this.locationMyBatisService = locationMyBatisService;
         this.scanner = new Scanner(System.in);
     }
 
 
-    private void viewAllLocations() {
-        System.out.println("=== All Locations ===");
+    public void start() {
+        boolean exit = false;
+        while (!exit) {
+            displayLocationMenu();
+            try {
+                int choice = getUserChoice();
+                switch (choice) {
+                    case 1:
+                        displayLocations();
+                        break;
+                    case 2:
+                        enterSourceAndDestination();
+                        break;
+                    case 3:
+                        exit = true;
+                        break;
+                    default:
+                        logger.info("Invalid choice. Please try again.");
+                        break;
+                }
+            } catch (InputMismatchException e) {
+                logger.info("Invalid input. Please enter a valid choice.");
+                scanner.nextLine(); // Consume the invalid input
+            } catch (SQLException e) {
+                logger.error("An error occurred while accessing the database: " + e.getMessage());
+                exit = true; // Exit the menu loop to prevent further errors
+            }
+        }
+        closeScanner();
+    }
+
+    private int getUserChoice() {
+        logger.info("Enter your choice: ");
+        return scanner.nextInt();
+    }
+
+    private void displayLocationMenu() {
+        logger.info("----------- Location Menu -----------");
+        logger.info("1. Display Locations");
+        logger.info("2. Enter Source and Destination");
+        logger.info("3. Exit and return to the main menu.");
+    }
+
+ 
+    private void displayLocations() throws SQLException {
+        logger.info("=== All Locations ===");
         for (Location location : locationMyBatisService.getAllLocations()) {
-            System.out.println(location);
-        }
-        System.out.println();
-    }
-
-    private void findLocationById() {
-        System.out.print("Enter location ID: ");
-        int locationId = scanner.nextInt();
-        Location location = locationMyBatisService.getLocationById(locationId);
-        if (location != null) {
-            System.out.println("Location found:");
-            System.out.println(location);
-        } else {
-            System.out.println("Location not found.");
-        }
-    }
-    private void updateLocation() {
-        System.out.print("Enter location ID: ");
-        int locationId = scanner.nextInt();
-        Location location = locationMyBatisService.getLocationById(locationId);
-        if (location != null) {
-            scanner.nextLine(); // Consume the newline character
-            System.out.println("Enter new location name:");
-            String locationName = scanner.nextLine();
-            location.setLocationName(locationName);
-            locationMyBatisService.updateLocation(location);
-            System.out.println("Location updated successfully!");
-        } else {
-            System.out.println("Location not found.");
+            logger.info(location);
         }
     }
 
-    private void deleteLocation() {
-        System.out.print("Enter location ID: ");
-        int locationId = scanner.nextInt();
-        Location location = locationMyBatisService.getLocationById(locationId);
-        if (location != null) {
-            locationMyBatisService.deleteLocation(locationId);
-            System.out.println("Location deleted successfully!");
+
+    private void enterSourceAndDestination() throws SQLException {
+        logger.info("Enter the source location ID: ");
+        int sourceId = scanner.nextInt();
+        logger.info("Enter the destination location ID: ");
+        int destinationId = scanner.nextInt();
+
+        // Retrieve the source and destination locations based on the IDs
+        Location sourceLocation = locationMyBatisService.getLocationById(sourceId);
+        Location destinationLocation = locationMyBatisService.getLocationById(destinationId);
+
+        if (sourceLocation != null && destinationLocation != null) {
+            logger.info("Source: " + sourceLocation.getLocationName());
+            logger.info("Destination: " + destinationLocation.getLocationName());
+            // Perform desired operations with the source and destination locations
         } else {
-            System.out.println("Location not found.");
+            logger.info("Invalid source or destination location ID.");
         }
+    }
+
+    private void closeScanner() {
+        scanner.close();
     }
 
 }
