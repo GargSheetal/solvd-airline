@@ -26,7 +26,7 @@ public class MainMenu {
 	public static void launch() {
 		try {
 			loadData();
-//			routeSelectionMenu = new RouteSelectionMenuHelper(locationList, airlineRouteList);
+			routeSelectionMenu = new RouteSelectionMenuHelper(locationList, airlineRouteList);
 
 			int option = 0;
 			do {
