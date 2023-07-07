@@ -45,4 +45,9 @@ public class AirLineRouteMybatisService {
     public void addRoute(AirLineRoute route) {
         this.airlinerouteMapper.addRoute(route);
     }
+
+    public void closeSession() {
+        sqlSession.close();
+    }
+
 }

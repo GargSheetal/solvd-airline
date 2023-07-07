@@ -1,4 +1,5 @@
 package solvd.airline.main;
+
 import solvd.airline.dataaccess.model.Location.Location;
 import solvd.airline.dataaccess.service.LocationMyBatisService;
 import solvd.airline.menu.LocationManagementMenu;
