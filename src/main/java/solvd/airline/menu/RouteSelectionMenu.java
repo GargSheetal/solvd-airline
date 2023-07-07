@@ -30,15 +30,25 @@ public class RouteSelectionMenu {
 //		loadTestData();
 		routeSelectionMenuHelper = new RouteSelectionMenuHelper(locationList, airlineRouteList);
 		ItineraryQueryResult itineraryQueryResult = queryItinerary();
-		logger.info("\n\nItinerary Query Result : -->\n" + itineraryQueryResult.toString());
+		logger.info("\n\n-- Query Result --\n\n" + itineraryQueryResult.toString());
 		routeSelectionInput(itineraryQueryResult);
 	}
 	
 	private static ItineraryQueryResult queryItinerary() {
+		System.out.println("\n\n");
+		System.out.println("*******************");
+		System.out.println("* Query Itinerary *");
+		System.out.println("*******************");
+		System.out.println("\n-- Input Options --\n");
+		printLocationList();	// to provide input options to the user
 		int originLocationId = requestInt("\nEnter Origin Location Id :");
 		int destinationLocationId = requestInt("Enter Destination Location Id :");
 		ItineraryQueryResult itineraryQueryResult = routeSelectionMenuHelper.getItineraryQueryResult(originLocationId, destinationLocationId);	
 		return itineraryQueryResult;
+	}
+	
+	private static void printLocationList() {
+		locationList.forEach(location -> System.out.println(location));
 	}
 	
 	private static int requestInt(String prompt) {
@@ -48,16 +58,21 @@ public class RouteSelectionMenu {
 	}
 	
 	private static void routeSelectionInput(ItineraryQueryResult itineraryQueryResult){
-		logger.info("\n\n ************ Presenting Route Selection Menu ************ ");
-		logger.info("\n 1. Select Cheapest Route");
-		logger.info("\n 2. Select Shortest Route");
+		System.out.println("\n");
+		System.out.println("********************");
+		System.out.println("* Select Itinerary *");
+		System.out.println("********************");
+		logger.info("\n 1. Select Cheapest Itinerary");
+		logger.info("\n 2. Select Shortest Itinerary");
 		logger.info("\n 3. Go back to Main Menu");
 		logger.info("\n 4. Exit");
-		int selectedRoute = requestInt("\nSelect a Route :");
+		int selectedRoute = requestInt("\nEnter input :");
 		
 		switch(selectedRoute) {
-		case 1 : logger.info(itineraryQueryResult.toStringCheapest()); break;
-		case 2 : logger.info(itineraryQueryResult.toStringShortest()); break;
+		case 1 : logger.info("\n-- Selected Itinerary --\n\n" + itineraryQueryResult.toStringCheapest());
+				System.out.println("\n\nGo back to main menu - to be implemented"); break;
+		case 2 : logger.info("\n-- Selected Itinerary --\n\n" + itineraryQueryResult.toStringShortest());
+				System.out.println("\n\nGo back to main menu - to be implemented"); break;
 		case 3 : System.out.println("\nGo back to main menu - to be implemented"); break;	// replace with mainMenu method (to be implemented)
 		case 4 : System.out.println("\nYou are exiting the app..."); break;
 		default : System.out.println("\nPlease enter a valid input..."); routeSelectionInput(itineraryQueryResult);

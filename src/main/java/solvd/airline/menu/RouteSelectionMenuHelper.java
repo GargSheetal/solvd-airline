@@ -38,16 +38,28 @@ public class RouteSelectionMenuHelper {
 		this.nextLocationIdx = new int[numLocations][numLocations];
 		
 		setRouteMatrix();
-		printIntMatrix("Distance (from DB)", locationNames, distance);
-		printDoubleMatrix("Price (from DB)", locationNames, price);
+		System.out.println("\n");
+		System.out.println("****************");
+		System.out.println("* Data From DB *");
+		System.out.println("****************");
+		printIntMatrix("-- Distance (miles) --", locationNames, distance);
+		printDoubleMatrix("-- Price ($)--", locationNames, price);
 		
 		cheapestRoute.setRouteSelectionStrategy(new CheapestRouteSelectionStrategy(numLocations, distance, price, nextLocationIdx));
-		printIntMatrix("Distance (cheapest route)", locationNames, cheapestRoute.getDistanceMatrix());
-		printDoubleMatrix("Price (cheapest route)", locationNames, cheapestRoute.getPriceMatrix());
+		System.out.println("\n");
+		System.out.println("*********************");
+		System.out.println("* Cheapest Strategy *");
+		System.out.println("*********************");
+		printIntMatrix("-- Distance (miles) --", locationNames, cheapestRoute.getDistanceMatrix());
+		printDoubleMatrix("-- Price ($)--", locationNames, cheapestRoute.getPriceMatrix());
 		
 		shortestRoute.setRouteSelectionStrategy(new ShortestRouteSelectionStrategy(numLocations, distance, price, nextLocationIdx));
-		printIntMatrix("Distance (shortest route)", locationNames, shortestRoute.getDistanceMatrix());
-		printDoubleMatrix("Price (shortest route)", locationNames, shortestRoute.getPriceMatrix());
+		System.out.println("\n");
+		System.out.println("*********************");
+		System.out.println("* Shortest Strategy *");
+		System.out.println("*********************");
+		printIntMatrix("-- Distance (miles) --", locationNames, shortestRoute.getDistanceMatrix());
+		printDoubleMatrix("-- Price ($)--", locationNames, shortestRoute.getPriceMatrix());
 	}
 	
 	private void printIntMatrix(String label, String[] header, int[][] matrix) {
@@ -69,7 +81,7 @@ public class RouteSelectionMenuHelper {
 			}
 		}
 
-		System.out.println("\n" + label + " : -->");    
+		System.out.println("\n" + label);    
 
 		for (int i = 0; i < display.length; i++) {
 			for (int j = 0; j < display[i].length; j++) {
@@ -98,7 +110,7 @@ public class RouteSelectionMenuHelper {
 			}
 		}
 
-		System.out.println("\n" + label + " : -->");    
+		System.out.println("\n" + label);    
 
 		for (int i = 0; i < display.length; i++) {
 			for (int j = 0; j < display[i].length; j++) {
