@@ -1,0 +1,33 @@
+2023-07-07 09:06:44.733 [main] INFO  solvd.airline.menu.LocationManagementMenu - ----------- Location Menu -----------
+2023-07-07 09:06:44.741 [main] INFO  solvd.airline.menu.LocationManagementMenu - 1. Display Locations
+2023-07-07 09:06:44.742 [main] INFO  solvd.airline.menu.LocationManagementMenu - 2. Enter Source and Destination
+2023-07-07 09:06:44.742 [main] INFO  solvd.airline.menu.LocationManagementMenu - 3. Exit and return to the main menu.
+2023-07-07 09:06:44.743 [main] INFO  solvd.airline.menu.LocationManagementMenu - Enter your choice: 
+2023-07-07 09:06:50.044 [main] INFO  solvd.airline.menu.LocationManagementMenu - Enter the source location ID: 
+2023-07-07 09:06:54.608 [main] INFO  solvd.airline.menu.LocationManagementMenu - Enter the destination location ID: 
+2023-07-07 09:07:05.903 [main] INFO  solvd.airline.menu.LocationManagementMenu - Invalid source or destination location ID.
+2023-07-07 09:07:05.903 [main] INFO  solvd.airline.menu.LocationManagementMenu - ----------- Location Menu -----------
+2023-07-07 09:07:05.905 [main] INFO  solvd.airline.menu.LocationManagementMenu - 1. Display Locations
+2023-07-07 09:07:05.905 [main] INFO  solvd.airline.menu.LocationManagementMenu - 2. Enter Source and Destination
+2023-07-07 09:07:05.905 [main] INFO  solvd.airline.menu.LocationManagementMenu - 3. Exit and return to the main menu.
+2023-07-07 09:07:05.905 [main] INFO  solvd.airline.menu.LocationManagementMenu - Enter your choice: 
+2023-07-07 09:09:43.839 [main] INFO  solvd.airline.menu.LocationManagementMenu - ----------- Location Menu -----------
+2023-07-07 09:09:43.844 [main] INFO  solvd.airline.menu.LocationManagementMenu - 1. Display Locations
+2023-07-07 09:09:43.845 [main] INFO  solvd.airline.menu.LocationManagementMenu - 2. Enter Source and Destination
+2023-07-07 09:09:43.845 [main] INFO  solvd.airline.menu.LocationManagementMenu - 3. Exit and return to the main menu.
+2023-07-07 09:09:43.845 [main] INFO  solvd.airline.menu.LocationManagementMenu - Enter your choice: 
+2023-07-07 09:09:50.201 [main] INFO  solvd.airline.menu.LocationManagementMenu - Enter the source location ID: 
+2023-07-07 09:09:52.792 [main] INFO  solvd.airline.menu.LocationManagementMenu - Invalid input. Please enter a valid choice.
+2023-07-07 09:09:52.793 [main] INFO  solvd.airline.menu.LocationManagementMenu - ----------- Location Menu -----------
+2023-07-07 09:09:52.794 [main] INFO  solvd.airline.menu.LocationManagementMenu - 1. Display Locations
+2023-07-07 09:09:52.794 [main] INFO  solvd.airline.menu.LocationManagementMenu - 2. Enter Source and Destination
+2023-07-07 09:09:52.794 [main] INFO  solvd.airline.menu.LocationManagementMenu - 3. Exit and return to the main menu.
+2023-07-07 09:09:52.794 [main] INFO  solvd.airline.menu.LocationManagementMenu - Enter your choice: 
+2023-07-07 09:09:57.268 [main] INFO  solvd.airline.menu.LocationManagementMenu - Enter the source location ID: 
+2023-07-07 09:09:59.977 [main] INFO  solvd.airline.menu.LocationManagementMenu - Enter the destination location ID: 
+2023-07-07 09:10:11.623 [main] INFO  solvd.airline.menu.LocationManagementMenu - Invalid source or destination location ID.
+2023-07-07 09:10:11.624 [main] INFO  solvd.airline.menu.LocationManagementMenu - ----------- Location Menu -----------
+2023-07-07 09:10:11.624 [main] INFO  solvd.airline.menu.LocationManagementMenu - 1. Display Locations
+2023-07-07 09:10:11.625 [main] INFO  solvd.airline.menu.LocationManagementMenu - 2. Enter Source and Destination
+2023-07-07 09:10:11.625 [main] INFO  solvd.airline.menu.LocationManagementMenu - 3. Exit and return to the main menu.
+2023-07-07 09:10:11.625 [main] INFO  solvd.airline.menu.LocationManagementMenu - Enter your choice: 
