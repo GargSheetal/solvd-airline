@@ -1,12 +1,13 @@
 package solvd.airline.main;
 
-import java.io.IOException;
+import solvd.airline.menu.MainMenu;
 
-import solvd.airline.menu.RouteSelectionMenu;
+import java.io.IOException;
 
 public class Main {
 	
-	public static void main(String[] args) {
-		RouteSelectionMenu.launch();
+	public static void main(String[] args) throws IOException {
+		MainMenu.launch();
+
 	}
 }

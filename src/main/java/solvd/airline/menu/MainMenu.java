@@ -14,9 +14,9 @@ import solvd.airline.dataaccess.model.Location.Location;
 import solvd.airline.dataaccess.service.AirLineRouteMybatisService;
 import solvd.airline.dataaccess.service.LocationMyBatisService;
 
-public class RouteSelectionMenu {
+public class MainMenu {
 	
-	private static final Logger logger = LogManager.getLogger(RouteSelectionMenu.class);
+	private static final Logger logger = LogManager.getLogger(MainMenu.class);
 	private static Scanner scanner = new Scanner(System.in);
 	private static RouteSelectionMenuHelper routeSelectionMenu;
 	private static List<Location> locationList = new ArrayList<>();
@@ -26,14 +26,16 @@ public class RouteSelectionMenu {
 	public static void launch() {
 		try {
 			loadData();
-			routeSelectionMenu = new RouteSelectionMenuHelper(locationList, airlineRouteList);
+//			routeSelectionMenu = new RouteSelectionMenuHelper(locationList, airlineRouteList);
 
 			int option = 0;
 			do {
 				try {
-					logger.info("Please choose an option:");
-					logger.info("1. Check routes");
-					logger.info("2. Exit");
+					logger.info("\n-------WelCome to Solve AirLine----------");
+					logger.info("\nPlease choose an option to get start:");
+					logger.info("\n1. Check routes");
+					logger.info("\n2. Exit");
+					logger.info("\n-----------------------------------------");
 					option = scanner.nextInt();
 
 					if (option == 1) {
@@ -54,25 +56,32 @@ public class RouteSelectionMenu {
 	private static void checkRoutes() {
 		try {
 			// Print all the routes
+			logger.info("\n--------Display--AlL--Routes--------------");
 			airlineRouteList.forEach(System.out::println);
 			System.out.println();
 
-			// Print all the locations
+			logger.info("\n--------Display--All--Locations-----------");
 			locationList.forEach(System.out::println);
 			System.out.println();
 
-			int originId = requestPrompt("Please enter your current location id:");
-			int destinationId = requestPrompt("Please enter your destination location id:");
+			int originId = requestPrompt("\nPlease enter your current location id:");
+			int destinationId = requestPrompt("\nPlease enter your destination location id:");
 
-			logger.info("Please choose an option:");
+			logger.info("\n-----------------------------------------");
+			logger.info("Please choose your route:");
 			logger.info("1. Fastest route");
 			logger.info("2. Cheapest route");
+			logger.info("\n-----------------------------------------");
 
 			int option = scanner.nextInt();
 
-			if (option == 1 || option == 2) {
-				routeSelectionMenu.getItineraryQueryResult(originId, destinationId);
-			} else {
+			if (option == 1) {
+				routeSelectionMenu.getItineraryQueryResult(originId, destinationId);// replace after fastest route
+			}
+			else if (option == 2){
+				routeSelectionMenu.getItineraryQueryResult(originId, destinationId);// replace after cheapest route
+			}
+			else {
 				logger.info("Invalid option, please enter 1 for fastest route or 2 for cheapest route.");
 			}
 		} catch (Exception e) {
