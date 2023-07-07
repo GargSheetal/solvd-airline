@@ -44,7 +44,7 @@ out/
 *.iml
 *.ipr
 *.iws
-
+*.logs
 ##############################
 ## Eclipse
 ##############################
@@ -62,7 +62,7 @@ local.properties
 .loadpath
 .factorypath
 db.properties
-logs/
+*.logs
 ##############################
 ## NetBeans
 ##############################
