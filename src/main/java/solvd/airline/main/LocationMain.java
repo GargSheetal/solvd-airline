@@ -4,6 +4,7 @@ import solvd.airline.dataaccess.service.LocationMyBatisService;
 import solvd.airline.menu.LocationManagementMenu;
 import solvd.airline.output.JsonParser;
 import java.util.List;
+import static solvd.airline.menu.LocationManagementMenu.logger;
 
 public class LocationMain {
     private static final String JSON_FILENAME = "sampleOutput.json";
@@ -17,21 +18,21 @@ public class LocationMain {
 
         // Retrieve all locations after menu operations
         List<Location> allLocations = locationService.getAllLocations();
-        System.out.println("All Locations:");
+        logger.info("All Locations:");
         for (Location loc : allLocations) {
-            System.out.println(loc);
+            logger.info(loc);
         }
 
         // Save data to JSON file
         JsonParser.saveDataToJson(allLocations, JSON_FILENAME);
-        System.out.println("Data saved to JSON file: " + JSON_FILENAME);
+        logger.info("Data saved to JSON file: " + JSON_FILENAME);
 
         // Load data from JSON file
         List<Location> loadedLocations = JsonParser.loadDataFromJson(JSON_FILENAME, Location.class);
-        System.out.println("Loaded Locations from JSON file:");
+        logger.info("Loaded Locations from JSON file:");
         if (loadedLocations != null) {
             for (Location loc : loadedLocations) {
-                System.out.println(loc);
+                logger.info(loc);
             }
         }
 
