@@ -1,5 +1,7 @@
 package solvd.airline.dataaccess.model.AirlineRoute;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -12,6 +14,7 @@ import java.util.stream.Collectors;
 public class AirLineRoutes {
 	
     @XmlElement(name = "airline_route")
+    @JsonProperty("airline_route")
     private List<AirLineRoute> routes;
 
     public List<AirLineRoute> getRoutes() {

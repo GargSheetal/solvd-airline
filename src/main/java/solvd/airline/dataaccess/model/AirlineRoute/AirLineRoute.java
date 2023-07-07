@@ -1,5 +1,6 @@
 package solvd.airline.dataaccess.model.AirlineRoute;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import solvd.airline.dataaccess.model.Location.Location;
 
 import javax.xml.bind.annotation.*;
@@ -9,14 +10,19 @@ import java.util.Objects;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class AirLineRoute {
     @XmlElement(name = "route_id")
+    @JsonProperty("route_id")
     private int routeId;
     @XmlElement(name = "origin_location")
+    @JsonProperty("origin_location")
     private Location originLocation;
     @XmlElement(name = "destination_location")
+    @JsonProperty("destination_location")
     private Location destinationLocation;
     @XmlElement(name = "distance_miles")
+    @JsonProperty("distance_miles")
     private int distanceMiles;
     @XmlElement(name = "price_dollars")
+    @JsonProperty("price_dollars")
     private double priceDollars;
 
     public AirLineRoute() {
