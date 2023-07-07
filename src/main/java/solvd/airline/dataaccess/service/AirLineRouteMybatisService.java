@@ -15,7 +15,7 @@ public class AirLineRouteMybatisService {
     private final SqlSession sqlSession;
     private final AirLineRouteMapper airlinerouteMapper;
 
-    public AirLineRouteMybatisService()  throws IOException {
+    public AirLineRouteMybatisService() {
         try {
             InputStream inputStream = Resources.getResourceAsStream("mybatis-config.xml");
             SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(inputStream);

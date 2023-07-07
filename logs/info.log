@@ -31,3 +31,28 @@
 2023-07-07 09:10:11.625 [main] INFO  solvd.airline.menu.LocationManagementMenu - 2. Enter Source and Destination
 2023-07-07 09:10:11.625 [main] INFO  solvd.airline.menu.LocationManagementMenu - 3. Exit and return to the main menu.
 2023-07-07 09:10:11.625 [main] INFO  solvd.airline.menu.LocationManagementMenu - Enter your choice: 
+2023-07-07 01:58:10.383 [main] INFO  solvd.airline.menu.RouteSelectionMenu - 
+Enter Origin Location Id :
+2023-07-07 01:58:17.630 [main] INFO  solvd.airline.menu.RouteSelectionMenu - Enter Destination Location Id :
+2023-07-07 01:58:18.641 [main] INFO  solvd.airline.menu.RouteSelectionMenu - 
+
+-- Query Result --
+
+Origin = Chicago | Destination = Houston
+[Cheapest Itinerary] Locations = Chicago -> Dallas -> Miami -> Houston | Distance = 2500 miles | Price = $295.0
+[Shortest Itinerary] Locations = Chicago -> Dallas -> Miami -> Houston | Distance = 2500 miles | Price = $295.0
+2023-07-07 01:58:18.642 [main] INFO  solvd.airline.menu.RouteSelectionMenu - 
+ 1. Select Cheapest Itinerary
+2023-07-07 01:58:18.642 [main] INFO  solvd.airline.menu.RouteSelectionMenu - 
+ 2. Select Shortest Itinerary
+2023-07-07 01:58:18.642 [main] INFO  solvd.airline.menu.RouteSelectionMenu - 
+ 3. Go back to Main Menu
+2023-07-07 01:58:18.642 [main] INFO  solvd.airline.menu.RouteSelectionMenu - 
+ 4. Exit
+2023-07-07 01:58:18.643 [main] INFO  solvd.airline.menu.RouteSelectionMenu - 
+Enter input :
+2023-07-07 01:58:22.229 [main] INFO  solvd.airline.menu.RouteSelectionMenu - 
+-- Selected Itinerary --
+
+Origin = Chicago | Destination = Houston
+[Shortest Itinerary] Locations = Chicago -> Dallas -> Miami -> Houston | Distance = 2500 miles | Price = $295.0
