@@ -11,11 +11,11 @@ public class LocationManagementMenu {
     public static final Logger logger = LogManager.getLogger(LocationManagementMenu.class);
     private final LocationMyBatisService locationMyBatisService;
     private final Scanner scanner;
-
     public LocationManagementMenu(LocationMyBatisService locationMyBatisService) {
         this.locationMyBatisService = locationMyBatisService;
         this.scanner = new Scanner(System.in);
     }
+
 
     public void start() {
         boolean exit = false;
@@ -60,12 +60,14 @@ public class LocationManagementMenu {
         logger.info("3. Exit and return to the main menu.");
     }
 
+ 
     private void displayLocations() throws SQLException {
         logger.info("=== All Locations ===");
         for (Location location : locationMyBatisService.getAllLocations()) {
             logger.info(location);
         }
     }
+
 
     private void enterSourceAndDestination() throws SQLException {
         logger.info("Enter the source location ID: ");
@@ -89,4 +91,5 @@ public class LocationManagementMenu {
     private void closeScanner() {
         scanner.close();
     }
+
 }

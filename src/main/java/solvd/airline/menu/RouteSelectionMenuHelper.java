@@ -46,6 +46,9 @@ public class RouteSelectionMenuHelper {
 		printDoubleMatrix("-- Price ($)--", locationNames, price);
 		
 		cheapestRoute.setRouteSelectionStrategy(new CheapestRouteSelectionStrategy(numLocations, distance, price, nextLocationIdx));
+		printIntMatrix("Distance (cheapest)", locationNames, cheapestRoute.getDistanceMatrix());
+		printDoubleMatrix("Price (cheapest)", locationNames, cheapestRoute.getPriceMatrix());
+
 		System.out.println("\n");
 		System.out.println("*********************");
 		System.out.println("* Cheapest Strategy *");
@@ -53,6 +56,7 @@ public class RouteSelectionMenuHelper {
 		printIntMatrix("-- Distance (miles) --", locationNames, cheapestRoute.getDistanceMatrix());
 		printDoubleMatrix("-- Price ($)--", locationNames, cheapestRoute.getPriceMatrix());
 		
+
 		shortestRoute.setRouteSelectionStrategy(new ShortestRouteSelectionStrategy(numLocations, distance, price, nextLocationIdx));
 		System.out.println("\n");
 		System.out.println("*********************");
@@ -74,7 +78,7 @@ public class RouteSelectionMenuHelper {
 		for (int mrow = 0; mrow < matrix.length; mrow++) {
 			for (int mcol = 0; mcol < matrix[0].length; mcol++) {
 				if (matrix[mrow][mcol] == INF) {
-					display[mrow + 1][mcol + 1] = String.format("%-15s", "∞"); 
+					display[mrow + 1][mcol + 1] = String.format("%-15s", "Not Available");
 				} else {
 					display[mrow + 1][mcol + 1] = String.format("%-15s", matrix[mrow][mcol]);
 				}
@@ -103,7 +107,7 @@ public class RouteSelectionMenuHelper {
 		for (int mrow = 0; mrow < matrix.length; mrow++) {
 			for (int mcol = 0; mcol < matrix[0].length; mcol++) {
 				if (matrix[mrow][mcol] == INF) {
-					display[mrow + 1][mcol + 1] = String.format("%-15s", "∞"); 
+					display[mrow + 1][mcol + 1] = String.format("%-15s", "Not Available");
 				} else {
 					display[mrow + 1][mcol + 1] = String.format("%-15s", matrix[mrow][mcol]);
 				}
@@ -119,7 +123,7 @@ public class RouteSelectionMenuHelper {
 			System.out.println();
 		}
 	}
-	
+
 	private void setRouteMatrix() {
 		// Initialize distance, price, and nextLocationIdx matrices
 		for(int i=0; i<numLocations; i++) {
@@ -127,7 +131,7 @@ public class RouteSelectionMenuHelper {
 			Arrays.fill(price[i], INF);
 			Arrays.fill(nextLocationIdx[i], -1);
 		}
-		
+
 		// Populate distance, price, and nextLocationIdx matrices with input data
 		for(AirLineRoute route: airlineRouteList) {
 			int airlineLocationId = route.getRouteId();
@@ -135,21 +139,25 @@ public class RouteSelectionMenuHelper {
 			int destinationLocationId = route.getDestinationLocation().getLocationId();
 			int distanceMiles = route.getDistanceMiles();
 			double priceDollars = route.getPriceDollars();
-			
+
 			int originLocationIdx = getLocationIndex(originLocationId);
 			int destinationLocationIdx = getLocationIndex(destinationLocationId);
-			
+
 			distance[originLocationIdx][destinationLocationIdx] = distanceMiles;
 			distance[destinationLocationIdx][originLocationIdx] = distanceMiles;
-			
+
 			price[originLocationIdx][destinationLocationIdx] = priceDollars;
 			price[destinationLocationIdx][originLocationIdx] = priceDollars;
-			
-			nextLocationIdx[originLocationIdx][destinationLocationIdx] = destinationLocationIdx;
+
 			nextLocationIdx[destinationLocationIdx][originLocationIdx] = originLocationIdx;
+			nextLocationIdx[originLocationIdx][destinationLocationIdx] = destinationLocationIdx;
+
 		}
 	}
-	
+
+
+
+
 	private int getLocationIndex(int locationId) {
 		for(int i=0; i<locations.length; i++) {
 			if(locations[i].getLocationId() == locationId) {
@@ -237,13 +245,13 @@ class ItineraryQueryResult {
 	public Itinerary getShortestItinerary() {
 		return shortestItinerary;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Origin = " + originLocation.getLocationName() 
-			+ " | Destination = " + destinationLocation.getLocationName()
-			+ "\n[Cheapest Itinerary] " + cheapestItinerary.toString()
-			+ "\n[Shortest Itinerary] " + shortestItinerary.toString();
+		return "Origin = " + originLocation.getLocationName()
+				+ " | Destination = " + destinationLocation.getLocationName()
+				+ "\n[Cheapest Itinerary] " + (cheapestItinerary == null ? "No route found" : cheapestItinerary.toString())
+				+ "\n[Shortest Itinerary] " + (shortestItinerary == null ? "No route found" : shortestItinerary.toString());
 	}
 	
 	public String toStringCheapest() {
@@ -292,3 +300,4 @@ class Itinerary {
 		return "Locations = " + locationString + " | Distance = " + totalDistance + " miles | Price = $" + totalPrice;
 	}
 }
+
