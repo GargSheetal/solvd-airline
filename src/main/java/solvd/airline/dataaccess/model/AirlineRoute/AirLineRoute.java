@@ -88,13 +88,11 @@ public class AirLineRoute {
 
     @Override
     public String toString() {
-        return "\nAirLineRoute{" +
-                "routeId=" + routeId +
-                ", originLocation=" + originLocation.getLocationName() +
-                ", destinationLocation=" + destinationLocation.getLocationName() +
-                ", distanceMiles=" + distanceMiles +
-                ", priceDollars=" + priceDollars +
-                '}';
+        return String.format("%-3s", routeId) +
+                " | Origin = " + String.format("%-15s", originLocation.getLocationName()) +
+                " | Destination = " + String.format("%-15s", destinationLocation.getLocationName()) +
+                " | Distance = " + String.format("%-4s", distanceMiles) +
+                " miles | Price = $" + String.format("%-6s", priceDollars);
     }
 
 

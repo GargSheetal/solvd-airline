@@ -6,8 +6,8 @@ import java.util.List;
 
 public class JsonParser {
     private static final String OUTPUT_DIRECTORY = "src/main/resources/output";
-
-    public static <T> void saveDataToJson(List<T> data, String filename) {
+    
+    public static void saveDataToJson(Object data, String filename) {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             File outputDirectory = new File(OUTPUT_DIRECTORY);
@@ -18,9 +18,9 @@ public class JsonParser {
             File outputFile = new File(outputDirectory, filename);
             objectMapper.writeValue(outputFile, data);
 
-            System.out.println("Data saved to JSON file: " + outputFile.getAbsolutePath());
+            System.out.println("\n\n... data saved to JSON file: " + outputFile.getAbsolutePath());
         } catch (IOException e) {
-            System.out.println("Failed to save data to JSON file: " + e.getMessage());
+            System.out.println("\n... failed to save data to JSON file: " + e.getMessage());
         }
     }
 
@@ -30,7 +30,7 @@ public class JsonParser {
             File inputFile = new File(OUTPUT_DIRECTORY, filename);
             return objectMapper.readValue(inputFile, objectMapper.getTypeFactory().constructCollectionType(List.class, valueType));
         } catch (IOException e) {
-            System.out.println("Failed to load data from JSON file: " + e.getMessage());
+            System.out.println("\n... failed to load data from JSON file: " + e.getMessage());
         }
         return null;
     }

@@ -10,7 +10,8 @@ import java.util.List;
 @XmlRootElement(name = "locations")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Locations {
-    @XmlElement(name = "location")
+   
+	@XmlElement(name = "location")
     @JsonProperty("locations")
     private List<Location> locations;
 
@@ -21,23 +22,4 @@ public class Locations {
     public List<Location> getAllLocations() {
         return locations;
     }
-
-
-    /*public void addLocation(Location location) {
-        locations.add(location);
-    }
-
-    public void removeLocation(Location location) {
-        locations.remove(location);
-    }
-
-
-    public Location getLocationById(int locationId) {
-        for (Location location : locations) {
-            if (location.getLocationId() == locationId) {
-                return location;
-            }
-        }
-        return null;
-    }*/
 }

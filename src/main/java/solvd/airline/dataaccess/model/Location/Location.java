@@ -1,13 +1,14 @@
 package solvd.airline.dataaccess.model.Location;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlElement;
-@XmlRootElement(name = "location")
+
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Location {
+	
     @XmlElement(name = "location_id")
     @JsonProperty("location_id")
     private int locationId;
@@ -27,8 +28,6 @@ public class Location {
         this.locationName = locationName;
     }
 
-
-    @XmlElement(name = "location_id")
     public int getLocationId() {
         return locationId;
     }
@@ -47,9 +46,6 @@ public class Location {
 
     @Override
     public String toString() {
-        return "Location{" +
-                "locationId=" + locationId +
-                ", locationName='" + locationName + '\'' +
-                '}';
+        return String.format("%-3s", locationId) + " | " + locationName;
     }
 }
