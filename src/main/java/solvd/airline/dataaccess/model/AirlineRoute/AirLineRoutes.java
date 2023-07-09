@@ -20,6 +20,9 @@ public class AirLineRoutes {
     public List<AirLineRoute> getRoutes() {
 		return routes;
 	}
+    public void setDataList(List<AirLineRoute> routes) {
+        this.routes = routes;
+    }
     
 	@Override
     public String toString() {

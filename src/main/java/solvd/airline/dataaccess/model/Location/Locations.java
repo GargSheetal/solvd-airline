@@ -1,5 +1,7 @@
 package solvd.airline.dataaccess.model.Location;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -10,16 +12,20 @@ import java.util.List;
 @XmlRootElement(name = "locations")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Locations {
-   
-	@XmlElement(name = "location")
+
+    @XmlElement(name = "location")
     @JsonProperty("locations")
-    private List<Location> locations;
+    private List<Location> dataList;
 
     public Locations() {
-        locations = new ArrayList<>();
+        dataList = new ArrayList<>();
     }
 
-    public List<Location> getAllLocations() {
-        return locations;
+    public List<Location> getDataList() {
+        return dataList;
+    }
+
+    public void setDataList(List<Location> dataList) {
+        this.dataList = dataList;
     }
 }
