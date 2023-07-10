@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Collections;
+
 
 import javax.xml.bind.JAXBException;
 
@@ -13,7 +15,9 @@ import org.apache.logging.log4j.Logger;
 
 import solvd.airline.dataaccess.model.AirlineRoute.AirLineRoute;
 
+import solvd.airline.dataaccess.model.AirlineRoute.AirLineRoutes;
 import solvd.airline.dataaccess.model.Location.Location;
+import solvd.airline.dataaccess.model.Location.Locations;
 import solvd.airline.dataaccess.service.AirLineRouteMybatisService;
 import solvd.airline.dataaccess.service.LocationMyBatisService;
 import solvd.airline.itinerary.ItineraryQueryResult;
@@ -38,6 +42,7 @@ public class RouteSelectionMenu {
 		ItineraryQueryResult itineraryQueryResult = queryItinerary();
 		logger.info("\n\n-- Query Result --\n\n" + itineraryQueryResult.toString());
 		JsonParser.saveDataToJson(itineraryQueryResult, "itineraryQueryResult.json");
+		XmlParser.saveListToXml(Collections.singletonList(itineraryQueryResult), "itineraryQueryResult.xml", ItineraryQueryResult.class);
 		routeSelectionInput(itineraryQueryResult);
 	}
 	
@@ -49,6 +54,7 @@ public class RouteSelectionMenu {
 		ItineraryQueryResult itineraryQueryResult = routeSelectionMenuHelper.getItineraryQueryResult(originLocationId, destinationLocationId);
 		logger.info("\n\n-- Query Result --\n\n" + itineraryQueryResult.toString());
 		JsonParser.saveDataToJson(itineraryQueryResult, "itineraryQueryResult.json");
+		XmlParser.saveListToXml(Collections.singletonList(itineraryQueryResult), "itineraryQueryResult.xml", ItineraryQueryResult.class);
 		routeSelectionInput(itineraryQueryResult);
 	}
 	
@@ -60,7 +66,7 @@ public class RouteSelectionMenu {
 		System.out.println("\n-- Input Options --\n");
 		printLocationList();	// to provide input options to the user
 		JsonParser.saveDataToJson(locationList, "locations.json"); 
-//		XmlParser.saveListToXml(locationList, "sampleLocationOutput.xml");
+		XmlParser.saveListToXml(locationList, "locations.xml", Locations.class);
 		
 		int originLocationId = requestInt("\nEnter Origin Location Id :");
 		int destinationLocationId = requestInt("Enter Destination Location Id :");
@@ -98,9 +104,11 @@ public class RouteSelectionMenu {
 		switch(selectedRoute) {
 		case 1 : logger.info("\n-- Selected Itinerary --\n\n" + itineraryQueryResult.toStringCheapest());
 				 JsonParser.saveDataToJson(itineraryQueryResult.getCheapestItinerary(), "selectedCheapestItinerary.json");
+				 XmlParser.writeXml(new File("src/main/resources/output/selectedCheapestItinerary.xml"), itineraryQueryResult.getCheapestItinerary());
 				 MainMenu.launchMainMenu(); break;
 		case 2 : logger.info("\n-- Selected Itinerary --\n\n" + itineraryQueryResult.toStringShortest());
 				 JsonParser.saveDataToJson(itineraryQueryResult.getShortestItinerary(), "selectedShortestItinerary.json");
+				 XmlParser.writeXml(new File("src/main/resources/output/selectedShortestItinerary.xml"), itineraryQueryResult.getShortestItinerary());
 				 MainMenu.launchMainMenu(); break;
 		case 3 : refreshItineraryQueryResult(itineraryQueryResult.getOriginLocation().getLocationId(), itineraryQueryResult.getDestinationLocation().getLocationId()); break; // implement refresh logic
 		case 4 : MainMenu.launchMainMenu(); break;	// replace with mainMenu method (to be implemented)

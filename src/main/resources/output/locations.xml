@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<locations>
+    <location>
+        <location_id>1</location_id>
+        <location_name>Atlanta</location_name>
+    </location>
+    <location>
+        <location_id>2</location_id>
+        <location_name>Chicago</location_name>
+    </location>
+    <location>
+        <location_id>7</location_id>
+        <location_name>Dallas</location_name>
+    </location>
+    <location>
+        <location_id>3</location_id>
+        <location_name>Detroit</location_name>
+    </location>
+    <location>
+        <location_id>9</location_id>
+        <location_name>Houston</location_name>
+    </location>
+    <location>
+        <location_id>5</location_id>
+        <location_name>Los Angeles</location_name>
+    </location>
+    <location>
+        <location_id>8</location_id>
+        <location_name>Miami</location_name>
+    </location>
+    <location>
+        <location_id>4</location_id>
+        <location_name>New York</location_name>
+    </location>
+    <location>
+        <location_id>10</location_id>
+        <location_name>Phoenix</location_name>
+    </location>
+    <location>
+        <location_id>6</location_id>
+        <location_name>San Francisco</location_name>
+    </location>
+</locations>
