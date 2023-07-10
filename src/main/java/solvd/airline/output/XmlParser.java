@@ -24,10 +24,10 @@ public class XmlParser {
             Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
             jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE); // To format XML
             jaxbMarshaller.marshal(object, file);
-            System.out.println("\n\n----- Data saved to Xml file: " + file.getAbsolutePath());
+            System.out.println("\n\n... data saved to Xml file: " + file.getAbsolutePath());
         } catch (JAXBException e) {
             e.printStackTrace();
-            System.out.println("\nFailed to save data to Xml file: " + e.getMessage());
+            System.out.println("\n... failed to save data to Xml file: " + e.getMessage());
         }
     }
 
@@ -51,9 +51,9 @@ public class XmlParser {
             File outputFile = new File(outputDirectory, filename);
             marshaller.marshal(wrapper, outputFile);
 
-            System.out.println("\n\n----- Data saved to Xml file: " + outputFile.getAbsolutePath());
+            System.out.println("\n\n... data saved to Xml file: " + outputFile.getAbsolutePath());
         } catch (Exception e) {
-            System.out.println("Failed to save data to XML file: " + e.getMessage());
+            System.out.println("... failed to save data to XML file: " + e.getMessage());
             e.printStackTrace();
         }
     }
