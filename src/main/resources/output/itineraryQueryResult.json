@@ -1,1 +1,39 @@
-{"cheapest_itinerary":{"total_distance":2400,"total_price":300.0,"locations":[{"location_id":1,"location_name":"Atlanta"},{"location_id":2,"location_name":"Chicago"},{"location_id":5,"location_name":"Los Angeles"}]},"shortest_itinerary":{"total_distance":2400,"total_price":300.0,"locations":[{"location_id":1,"location_name":"Atlanta"},{"location_id":2,"location_name":"Chicago"},{"location_id":5,"location_name":"Los Angeles"}]}}
+{
+    "dataList": [],
+    "cheapest_itinerary": {
+        "total_distance": 1200,
+        "total_price": 180.0,
+        "locations": [
+            {
+                "location_id": 10,
+                "location_name": "Phoenix"
+            },
+            {
+                "location_id": 6,
+                "location_name": "San Francisco"
+            },
+            {
+                "location_id": 5,
+                "location_name": "Los Angeles"
+            }
+        ]
+    },
+    "shortest_itinerary": {
+        "total_distance": 1200,
+        "total_price": 180.0,
+        "locations": [
+            {
+                "location_id": 10,
+                "location_name": "Phoenix"
+            },
+            {
+                "location_id": 6,
+                "location_name": "San Francisco"
+            },
+            {
+                "location_id": 5,
+                "location_name": "Los Angeles"
+            }
+        ]
+    }
+}

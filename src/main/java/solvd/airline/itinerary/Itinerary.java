@@ -26,6 +26,10 @@ public class Itinerary {
 	@XmlElement(name = "location")
     @JsonProperty("locations")
 	private List<Location> locations;
+
+	public Itinerary() {
+
+	}
 	
 	public Itinerary(List<Location> locations, int totalDistance, double totalPrice) {
 		this.locations = locations;

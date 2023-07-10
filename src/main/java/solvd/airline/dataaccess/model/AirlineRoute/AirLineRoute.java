@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import solvd.airline.dataaccess.model.Location.Location;
 
 import javax.xml.bind.annotation.*;
+import java.util.List;
 import java.util.Objects;
 
 @XmlRootElement(name = "airline_route")
@@ -113,3 +114,4 @@ public class AirLineRoute {
         return Objects.hash(routeId, originLocation, destinationLocation, distanceMiles, priceDollars);
     }
 }
+

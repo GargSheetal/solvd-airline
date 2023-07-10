@@ -10,6 +10,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import solvd.airline.dataaccess.model.Location.Location;
 
+import java.util.Collections;
+import java.util.List;
+
 @XmlRootElement(name = "itinerary_query_result")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ItineraryQueryResult {
@@ -29,6 +32,10 @@ public class ItineraryQueryResult {
 	@XmlElement(name = "shortest_itinerary")
     @JsonProperty("shortest_itinerary")
 	private Itinerary shortestItinerary;
+
+	public ItineraryQueryResult(){
+
+	}
 	
 	public ItineraryQueryResult(Location originLocation, Location destinationLocation, Itinerary cheapestItinerary,
 			Itinerary shortestItinerary) {
@@ -53,6 +60,21 @@ public class ItineraryQueryResult {
 	public Itinerary getShortestItinerary() {
 		return shortestItinerary;
 	}
+
+	public List<ItineraryQueryResult> getDataList() {
+		return Collections.emptyList();
+	}
+
+	public void setDataList(List<ItineraryQueryResult> dataList) {
+		if (!dataList.isEmpty()) {
+			ItineraryQueryResult other = dataList.get(0);
+			this.originLocation = other.originLocation;
+			this.destinationLocation = other.destinationLocation;
+			this.cheapestItinerary = other.cheapestItinerary;
+			this.shortestItinerary = other.shortestItinerary;
+		}
+	}
+
 
 	@Override
 	public String toString() {

@@ -12,10 +12,12 @@ import org.apache.logging.log4j.Logger;
 
 import solvd.airline.dataaccess.model.AirlineRoute.AirLineRoute;
 
+import solvd.airline.dataaccess.model.AirlineRoute.AirLineRoutes;
 import solvd.airline.dataaccess.model.Location.Location;
 import solvd.airline.dataaccess.service.AirLineRouteMybatisService;
 import solvd.airline.dataaccess.service.LocationMyBatisService;
 import solvd.airline.output.JsonParser;
+import solvd.airline.output.XmlParser;
 
 public class MainMenu {
 	
@@ -33,11 +35,14 @@ public class MainMenu {
 		int response = RouteSelectionMenu.requestInt("\n\nEnter input :");
 
 		switch(response) {
-		case 1 : printAirlineRouteList(); 
-				JsonParser.saveDataToJson(airlineRouteList, "airlineRoutes.json"); launchMainMenu(); break;
-		case 2 : RouteSelectionMenu.launch(); break;
-		case 3 : logger.info("\nBye for now !!"); break;
-		default : logger.info("\nPlease enter a valid input..."); launchMainMenu();
+			case 1 : printAirlineRouteList();
+				JsonParser.saveDataToJson(airlineRouteList, "JsonairlineRoutes.json");
+				XmlParser.saveListToXml(airlineRouteList, "XmlairlineRoutes.xml", AirLineRoutes.class);
+				launchMainMenu();
+				break;
+			case 2 : RouteSelectionMenu.launch(); break;
+			case 3 : logger.info("\nBye for now !!"); break;
+			default : logger.info("\nPlease enter a valid input..."); launchMainMenu();
 		}
 	}
 
