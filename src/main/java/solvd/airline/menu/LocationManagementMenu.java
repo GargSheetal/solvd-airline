@@ -16,7 +16,6 @@ public class LocationManagementMenu {
         this.scanner = new Scanner(System.in);
     }
 
-
     public void start() {
         boolean exit = false;
         while (!exit) {

@@ -10,105 +10,52 @@ import org.apache.logging.log4j.Logger;
 
 import solvd.airline.dataaccess.model.AirlineRoute.AirLineRoute;
 
-import solvd.airline.dataaccess.model.Location.Location;
+import solvd.airline.dataaccess.model.AirlineRoute.AirLineRoutes;
 import solvd.airline.dataaccess.service.AirLineRouteMybatisService;
-import solvd.airline.dataaccess.service.LocationMyBatisService;
+import solvd.airline.output.JsonParser;
+import solvd.airline.output.XmlParser;
 
 public class MainMenu {
 	
 	private static final Logger logger = LogManager.getLogger(MainMenu.class);
 	private static Scanner scanner = new Scanner(System.in);
-	private static RouteSelectionMenuHelper routeSelectionMenu;
-	private static List<Location> locationList = new ArrayList<>();
+	private static AirLineRouteMybatisService airLineRouteMybatisService = new AirLineRouteMybatisService();
 	private static List<AirLineRoute> airlineRouteList = new ArrayList<>();
+	
+	public static void launchMainMenu() throws IOException {
+		logger.info("\n\n*************");
+		logger.info("* Main Menu *");
+		logger.info("*************");
+		logger.info("\n1. View All Routes");
+		logger.info("\n2. Select Itinerary");
+		logger.info("\n3. Exit");
+		int response = requestInt("\n\nEnter input :");
 
-
-	public static void launch() {
-		try {
-			loadData();
-			routeSelectionMenu = new RouteSelectionMenuHelper(locationList, airlineRouteList);
-
-			int option = 0;
-			do {
-				try {
-					logger.info("\n-------WelCome to Solve AirLine----------");
-					logger.info("\nPlease choose an option to get start:");
-					logger.info("\n1. Check routes");
-					logger.info("\n2. Exit");
-					logger.info("\n-----------------------------------------");
-					option = scanner.nextInt();
-
-					if (option == 1) {
-						checkRoutes();
-					} else if (option != 2) {
-						logger.info("Invalid option, please enter 1 to check routes or 2 to exit.");
-					}
-				} catch (Exception e) {
-					logger.error("An error occurred during user input", e);
-					logger.info("Invalid input, please try again.");
-				}
-			} while (option != 2);
-		} catch (IOException e) {
-			logger.error("An error occurred while launching the route selection menu", e);
+		switch(response) {
+			case 1 : printAirlineRouteList();
+				JsonParser.saveDataToJson(airlineRouteList, "JsonairlineRoutes.json");
+				XmlParser.saveListToXml(airlineRouteList, "XmlairlineRoutes.xml", AirLineRoutes.class);
+				launchMainMenu();
+				break;
+			case 2 : RouteSelectionMenu.launch(); break;
+			case 3 : logger.info("\nBye for now !!"); break;
+			default : logger.info("\nPlease enter a valid input..."); launchMainMenu();
 		}
 	}
 
-	private static void checkRoutes() {
-		try {
-			// Print all the routes
-			logger.info("\n--------Display--AlL--Routes--------------");
-			airlineRouteList.forEach(System.out::println);
-			System.out.println();
-
-			logger.info("\n--------Display--All--Locations-----------");
-			locationList.forEach(System.out::println);
-			System.out.println();
-
-			int originId = requestPrompt("\nPlease enter your current location id:");
-			int destinationId = requestPrompt("\nPlease enter your destination location id:");
-
-			logger.info("\n-----------------------------------------");
-			logger.info("Please choose your route:");
-			logger.info("1. Fastest route");
-			logger.info("2. Cheapest route");
-			logger.info("\n-----------------------------------------");
-
-			int option = scanner.nextInt();
-
-			if (option == 1) {
-				routeSelectionMenu.getItineraryQueryResult(originId, destinationId);// replace after fastest route
-			}
-			else if (option == 2){
-				routeSelectionMenu.getItineraryQueryResult(originId, destinationId);// replace after cheapest route
-			}
-			else {
-				logger.info("Invalid option, please enter 1 for fastest route or 2 for cheapest route.");
-			}
-		} catch (Exception e) {
-			logger.error("An error occurred during route selection", e);
-			logger.info("An error occurred, please try again.");
-		}
+	private static void printAirlineRouteList() {
+		logger.info("\n---  Displaying All Routes  ---\n");
+		airlineRouteList = getAllAirlineRoutes();
+		airlineRouteList.forEach(System.out::println);
 	}
-
-	public static int requestPrompt(String prompt) {
+	
+	private static List<AirLineRoute> getAllAirlineRoutes() {
+		return airLineRouteMybatisService.getAllRoutes();
+	}
+	
+	public static int requestInt(String prompt) {
 		logger.info(prompt);
 		int id = scanner.nextInt();
 		return id;
-	}
-
-	private static void loadData() throws IOException {
-		LocationMyBatisService locationService = new LocationMyBatisService();
-		AirLineRouteMybatisService airlineRouteService = new AirLineRouteMybatisService();
-
-		try {
-			locationList = locationService.getAllLocations();
-			airlineRouteList = airlineRouteService.getAllRoutes();
-		} catch (Exception e) {
-			logger.error("Error loading data from the database", e);
-			throw new RuntimeException("Failed to load data", e);
-		} finally {
-			locationService.closeSession();
-			airlineRouteService.closeSession();
-		}
 	}
 }

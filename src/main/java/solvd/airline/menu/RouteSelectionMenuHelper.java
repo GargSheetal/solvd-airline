@@ -7,7 +7,8 @@ import java.util.List;
 import solvd.airline.dataaccess.strategy.RouteSelectionSystem;
 import solvd.airline.dataaccess.strategy.CheapestRouteSelectionStrategy;
 import solvd.airline.dataaccess.strategy.ShortestRouteSelectionStrategy;
-
+import solvd.airline.itinerary.Itinerary;
+import solvd.airline.itinerary.ItineraryQueryResult;
 import solvd.airline.dataaccess.model.AirlineRoute.AirLineRoute;
 import solvd.airline.dataaccess.model.Location.Location;
 
@@ -37,33 +38,60 @@ public class RouteSelectionMenuHelper {
 		this.price = new double[numLocations][numLocations];
 		this.nextLocationIdx = new int[numLocations][numLocations];
 		
-		setRouteMatrix();
 		System.out.println("\n");
 		System.out.println("****************");
 		System.out.println("* Data From DB *");
 		System.out.println("****************");
+		setRouteMatrix();
 		printIntMatrix("-- Distance (miles) --", locationNames, distance);
 		printDoubleMatrix("-- Price ($)--", locationNames, price);
 		
-		cheapestRoute.setRouteSelectionStrategy(new CheapestRouteSelectionStrategy(numLocations, distance, price, nextLocationIdx));
-		printIntMatrix("Distance (cheapest)", locationNames, cheapestRoute.getDistanceMatrix());
-		printDoubleMatrix("Price (cheapest)", locationNames, cheapestRoute.getPriceMatrix());
-
 		System.out.println("\n");
 		System.out.println("*********************");
 		System.out.println("* Cheapest Strategy *");
 		System.out.println("*********************");
+		cheapestRoute.setRouteSelectionStrategy(new CheapestRouteSelectionStrategy(numLocations, copyIntArray(distance), copyDoubleArray(price), copyIntArray(nextLocationIdx)));
 		printIntMatrix("-- Distance (miles) --", locationNames, cheapestRoute.getDistanceMatrix());
 		printDoubleMatrix("-- Price ($)--", locationNames, cheapestRoute.getPriceMatrix());
 		
-
-		shortestRoute.setRouteSelectionStrategy(new ShortestRouteSelectionStrategy(numLocations, distance, price, nextLocationIdx));
 		System.out.println("\n");
 		System.out.println("*********************");
 		System.out.println("* Shortest Strategy *");
 		System.out.println("*********************");
+		shortestRoute.setRouteSelectionStrategy(new ShortestRouteSelectionStrategy(numLocations, copyIntArray(distance), copyDoubleArray(price), copyIntArray(nextLocationIdx)));
 		printIntMatrix("-- Distance (miles) --", locationNames, shortestRoute.getDistanceMatrix());
 		printDoubleMatrix("-- Price ($)--", locationNames, shortestRoute.getPriceMatrix());
+	}
+	
+	public int[][] copyIntArray(int[][] originalArray) {
+	    int rows = originalArray.length;
+	    int columns = originalArray[0].length;
+
+	    int[][] copyArray = new int[rows][columns];
+
+	    for (int i = 0; i < rows; i++) {
+	        for (int j = 0; j < columns; j++) {
+	            copyArray[i][j] = originalArray[i][j];
+	        }
+	    }
+
+	    return copyArray;
+	}
+	
+	
+	public double[][] copyDoubleArray(double[][] originalArray) {
+	    int rows = originalArray.length;
+	    int columns = originalArray[0].length;
+
+	    double[][] copyArray = new double[rows][columns];
+
+	    for (int i = 0; i < rows; i++) {
+	        for (int j = 0; j < columns; j++) {
+	            copyArray[i][j] = originalArray[i][j];
+	        }
+	    }
+
+	    return copyArray;
 	}
 	
 	private void printIntMatrix(String label, String[] header, int[][] matrix) {
@@ -78,7 +106,7 @@ public class RouteSelectionMenuHelper {
 		for (int mrow = 0; mrow < matrix.length; mrow++) {
 			for (int mcol = 0; mcol < matrix[0].length; mcol++) {
 				if (matrix[mrow][mcol] == INF) {
-					display[mrow + 1][mcol + 1] = String.format("%-15s", "Not Available");
+					display[mrow + 1][mcol + 1] = String.format("%-15s", "NA");
 				} else {
 					display[mrow + 1][mcol + 1] = String.format("%-15s", matrix[mrow][mcol]);
 				}
@@ -107,7 +135,7 @@ public class RouteSelectionMenuHelper {
 		for (int mrow = 0; mrow < matrix.length; mrow++) {
 			for (int mcol = 0; mcol < matrix[0].length; mcol++) {
 				if (matrix[mrow][mcol] == INF) {
-					display[mrow + 1][mcol + 1] = String.format("%-15s", "Not Available");
+					display[mrow + 1][mcol + 1] = String.format("%-15s", "NA");
 				} else {
 					display[mrow + 1][mcol + 1] = String.format("%-15s", matrix[mrow][mcol]);
 				}
@@ -154,9 +182,6 @@ public class RouteSelectionMenuHelper {
 
 		}
 	}
-
-
-
 
 	private int getLocationIndex(int locationId) {
 		for(int i=0; i<locations.length; i++) {
@@ -211,93 +236,6 @@ public class RouteSelectionMenuHelper {
 			shortestItinerary
 		);
 		return itineraryQueryResult;
-	}
-}
-
-
-class ItineraryQueryResult {
-	
-	private Location originLocation;
-	private Location destinationLocation;
-	private Itinerary cheapestItinerary;
-	private Itinerary shortestItinerary;
-	
-	public ItineraryQueryResult(Location originLocation, Location destinationLocation, Itinerary cheapestItinerary,
-			Itinerary shortestItinerary) {
-		this.originLocation = originLocation;
-		this.destinationLocation = destinationLocation;
-		this.cheapestItinerary = cheapestItinerary;
-		this.shortestItinerary = shortestItinerary;
-	}
-
-	public Location getOriginLocation() {
-		return originLocation;
-	}
-
-	public Location getDestinationLocation() {
-		return destinationLocation;
-	}
-
-	public Itinerary getCheapestItinerary() {
-		return cheapestItinerary;
-	}
-
-	public Itinerary getShortestItinerary() {
-		return shortestItinerary;
-	}
-
-	@Override
-	public String toString() {
-		return "Origin = " + originLocation.getLocationName()
-				+ " | Destination = " + destinationLocation.getLocationName()
-				+ "\n[Cheapest Itinerary] " + (cheapestItinerary == null ? "No route found" : cheapestItinerary.toString())
-				+ "\n[Shortest Itinerary] " + (shortestItinerary == null ? "No route found" : shortestItinerary.toString());
-	}
-	
-	public String toStringCheapest() {
-		return "Origin = " + originLocation.getLocationName() 
-			+ " | Destination = " + destinationLocation.getLocationName()
-			+ "\n[Cheapest Itinerary] " + cheapestItinerary.toString();
-	}
-	
-	public String toStringShortest() {
-		return "Origin = " + originLocation.getLocationName() 
-			+ " | Destination = " + destinationLocation.getLocationName()
-			+ "\n[Shortest Itinerary] " + shortestItinerary.toString();
-	}
-}
-
-class Itinerary {
-	
-	private int totalDistance;
-	private double totalPrice;
-	private List<Location> locations;
-	
-	public Itinerary(List<Location> locations, int totalDistance, double totalPrice) {
-		this.locations = locations;
-		this.totalDistance = totalDistance;
-		this.totalPrice = totalPrice;
-	}
-
-	public int getTotalDistance() {
-		return totalDistance;
-	}
-
-	public double getTotalPrice() {
-		return totalPrice;
-	}
-	
-	public List<Location> getLocations() {
-		return locations;
-	}
-
-	@Override
-	public String toString() {
-		String locationString = locations.get(0).getLocationName();
-		for (int i = 1; i < locations.size(); i++) {
-			locationString = locationString + String.format(" -> %s", locations.get(i).getLocationName());
-		}
-		return "Locations = " + locationString + " | Distance = " + totalDistance + " miles | Price = $" + totalPrice;
 	}
 }
 
