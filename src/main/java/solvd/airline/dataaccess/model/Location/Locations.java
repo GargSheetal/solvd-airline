@@ -14,10 +14,11 @@ import java.util.List;
 public class Locations {
 
     @XmlElement(name = "location")
-    @JsonProperty("locations")
     private List<Location> dataList;
-
+    @JsonProperty("locations")
+    private List<Location> locations;
     public Locations() {
+        locations = new ArrayList<>();
         dataList = new ArrayList<>();
     }
 
@@ -25,6 +26,9 @@ public class Locations {
         return dataList;
     }
 
+    public List<Location> getAllLocations() {
+        return locations;
+    }
     public void setDataList(List<Location> dataList) {
         this.dataList = dataList;
     }
