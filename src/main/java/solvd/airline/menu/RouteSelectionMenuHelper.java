@@ -38,30 +38,60 @@ public class RouteSelectionMenuHelper {
 		this.price = new double[numLocations][numLocations];
 		this.nextLocationIdx = new int[numLocations][numLocations];
 		
-		setRouteMatrix();
 		System.out.println("\n");
 		System.out.println("****************");
 		System.out.println("* Data From DB *");
 		System.out.println("****************");
+		setRouteMatrix();
 		printIntMatrix("-- Distance (miles) --", locationNames, distance);
 		printDoubleMatrix("-- Price ($)--", locationNames, price);
 		
-		cheapestRoute.setRouteSelectionStrategy(new CheapestRouteSelectionStrategy(numLocations, distance, price, nextLocationIdx));
 		System.out.println("\n");
 		System.out.println("*********************");
 		System.out.println("* Cheapest Strategy *");
 		System.out.println("*********************");
+		cheapestRoute.setRouteSelectionStrategy(new CheapestRouteSelectionStrategy(numLocations, copyIntArray(distance), copyDoubleArray(price), copyIntArray(nextLocationIdx)));
 		printIntMatrix("-- Distance (miles) --", locationNames, cheapestRoute.getDistanceMatrix());
 		printDoubleMatrix("-- Price ($)--", locationNames, cheapestRoute.getPriceMatrix());
 		
-
-		shortestRoute.setRouteSelectionStrategy(new ShortestRouteSelectionStrategy(numLocations, distance, price, nextLocationIdx));
 		System.out.println("\n");
 		System.out.println("*********************");
 		System.out.println("* Shortest Strategy *");
 		System.out.println("*********************");
+		shortestRoute.setRouteSelectionStrategy(new ShortestRouteSelectionStrategy(numLocations, copyIntArray(distance), copyDoubleArray(price), copyIntArray(nextLocationIdx)));
 		printIntMatrix("-- Distance (miles) --", locationNames, shortestRoute.getDistanceMatrix());
 		printDoubleMatrix("-- Price ($)--", locationNames, shortestRoute.getPriceMatrix());
+	}
+	
+	public int[][] copyIntArray(int[][] originalArray) {
+	    int rows = originalArray.length;
+	    int columns = originalArray[0].length;
+
+	    int[][] copyArray = new int[rows][columns];
+
+	    for (int i = 0; i < rows; i++) {
+	        for (int j = 0; j < columns; j++) {
+	            copyArray[i][j] = originalArray[i][j];
+	        }
+	    }
+
+	    return copyArray;
+	}
+	
+	
+	public double[][] copyDoubleArray(double[][] originalArray) {
+	    int rows = originalArray.length;
+	    int columns = originalArray[0].length;
+
+	    double[][] copyArray = new double[rows][columns];
+
+	    for (int i = 0; i < rows; i++) {
+	        for (int j = 0; j < columns; j++) {
+	            copyArray[i][j] = originalArray[i][j];
+	        }
+	    }
+
+	    return copyArray;
 	}
 	
 	private void printIntMatrix(String label, String[] header, int[][] matrix) {
