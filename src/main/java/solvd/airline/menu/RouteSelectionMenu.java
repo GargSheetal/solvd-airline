@@ -33,8 +33,8 @@ public class RouteSelectionMenu {
 	private static List<AirLineRoute> airlineRouteList = new ArrayList<>();
 	
 	public static void launch() throws IOException {
-//		loadData();
-		loadTestData();
+		loadData();
+//		loadTestData();
 		routeSelectionMenuHelper = new RouteSelectionMenuHelper(locationList, airlineRouteList);
 		ItineraryQueryResult itineraryQueryResult = queryItinerary();
 		logger.info("\n\n-- Query Result --\n\n" + itineraryQueryResult.toString());
@@ -45,8 +45,8 @@ public class RouteSelectionMenu {
 	
 	public static void refreshItineraryQueryResult(int originLocationId, int destinationLocationId) throws IOException {
 		logger.info("\n... reloading data from Database");
-//		loadData();
-		loadTestData();
+		loadData();
+//		loadTestData();
 		routeSelectionMenuHelper = new RouteSelectionMenuHelper(locationList, airlineRouteList);
 		ItineraryQueryResult itineraryQueryResult = routeSelectionMenuHelper.getItineraryQueryResult(originLocationId, destinationLocationId);
 		logger.info("\n\n-- Query Result --\n\n" + itineraryQueryResult.toString());
