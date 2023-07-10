@@ -62,11 +62,17 @@ public class ItineraryQueryResult {
 	}
 
 	public List<ItineraryQueryResult> getDataList() {
-		return Collections.singletonList(this);
+		return Collections.emptyList();
 	}
 
 	public void setDataList(List<ItineraryQueryResult> dataList) {
-
+		if (!dataList.isEmpty()) {
+			ItineraryQueryResult other = dataList.get(0);
+			this.originLocation = other.originLocation;
+			this.destinationLocation = other.destinationLocation;
+			this.cheapestItinerary = other.cheapestItinerary;
+			this.shortestItinerary = other.shortestItinerary;
+		}
 	}
 
 

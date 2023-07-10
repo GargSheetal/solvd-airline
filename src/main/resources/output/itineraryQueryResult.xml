@@ -1,2 +1,43 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<itinerary_query_result/>
+<itinerary_query_result>
+    <origin_location>
+        <location_id>10</location_id>
+        <location_name>Phoenix</location_name>
+    </origin_location>
+    <destination_location>
+        <location_id>5</location_id>
+        <location_name>Los Angeles</location_name>
+    </destination_location>
+    <cheapest_itinerary>
+        <total_distance>1200</total_distance>
+        <total_price>180.0</total_price>
+        <location>
+            <location_id>10</location_id>
+            <location_name>Phoenix</location_name>
+        </location>
+        <location>
+            <location_id>6</location_id>
+            <location_name>San Francisco</location_name>
+        </location>
+        <location>
+            <location_id>5</location_id>
+            <location_name>Los Angeles</location_name>
+        </location>
+    </cheapest_itinerary>
+    <shortest_itinerary>
+        <total_distance>1200</total_distance>
+        <total_price>180.0</total_price>
+        <location>
+            <location_id>10</location_id>
+            <location_name>Phoenix</location_name>
+        </location>
+        <location>
+            <location_id>6</location_id>
+            <location_name>San Francisco</location_name>
+        </location>
+        <location>
+            <location_id>5</location_id>
+            <location_name>Los Angeles</location_name>
+        </location>
+    </shortest_itinerary>
+</itinerary_query_result>
