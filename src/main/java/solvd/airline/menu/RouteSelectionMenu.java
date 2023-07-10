@@ -7,19 +7,16 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Collections;
 
-
-import javax.xml.bind.JAXBException;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import solvd.airline.dataaccess.model.AirlineRoute.AirLineRoute;
 
-import solvd.airline.dataaccess.model.AirlineRoute.AirLineRoutes;
 import solvd.airline.dataaccess.model.Location.Location;
 import solvd.airline.dataaccess.model.Location.Locations;
 import solvd.airline.dataaccess.service.AirLineRouteMybatisService;
 import solvd.airline.dataaccess.service.LocationMyBatisService;
+import solvd.airline.exceptions.InvalidInputException;
 import solvd.airline.itinerary.ItineraryQueryResult;
 import solvd.airline.output.JsonParser;
 import solvd.airline.output.XmlParser;
@@ -36,8 +33,8 @@ public class RouteSelectionMenu {
 	private static List<AirLineRoute> airlineRouteList = new ArrayList<>();
 	
 	public static void launch() throws IOException {
-		loadData();
-//		loadTestData();
+//		loadData();
+		loadTestData();
 		routeSelectionMenuHelper = new RouteSelectionMenuHelper(locationList, airlineRouteList);
 		ItineraryQueryResult itineraryQueryResult = queryItinerary();
 		logger.info("\n\n-- Query Result --\n\n" + itineraryQueryResult.toString());
@@ -48,8 +45,8 @@ public class RouteSelectionMenu {
 	
 	public static void refreshItineraryQueryResult(int originLocationId, int destinationLocationId) throws IOException {
 		logger.info("\n... reloading data from Database");
-		loadData();
-//		loadTestData();
+//		loadData();
+		loadTestData();
 		routeSelectionMenuHelper = new RouteSelectionMenuHelper(locationList, airlineRouteList);
 		ItineraryQueryResult itineraryQueryResult = routeSelectionMenuHelper.getItineraryQueryResult(originLocationId, destinationLocationId);
 		logger.info("\n\n-- Query Result --\n\n" + itineraryQueryResult.toString());
@@ -68,8 +65,8 @@ public class RouteSelectionMenu {
 		JsonParser.saveDataToJson(locationList, "locations.json"); 
 		XmlParser.saveListToXml(locationList, "locations.xml", Locations.class);
 		
-		int originLocationId = requestInt("\nEnter Origin Location Id :");
-		int destinationLocationId = requestInt("Enter Destination Location Id :");
+		int originLocationId = requestLocationIdInput("\nEnter Origin Location Id :");
+		int destinationLocationId = requestLocationIdInput("Enter Destination Location Id :");
 		ItineraryQueryResult itineraryQueryResult = routeSelectionMenuHelper.getItineraryQueryResult(originLocationId, destinationLocationId);
 		return itineraryQueryResult;
 	}
@@ -87,6 +84,19 @@ public class RouteSelectionMenu {
 		logger.info(prompt);
 		int id = scanner.nextInt();
 		return id;
+	}
+	
+	private static int requestLocationIdInput(String prompt) {
+		int inputId = requestInt(prompt);
+		try {
+			if(!(locationList.contains(new Location(inputId)))) {
+				throw new InvalidInputException("\nPlease enter a valid input...");
+			}
+		} catch(InvalidInputException e) {
+			logger.info("\nInvalidInputException : " + e.getMessage());
+			inputId = requestLocationIdInput(prompt);
+		}
+		return inputId;
 	}
 	
 	private static void routeSelectionInput(ItineraryQueryResult itineraryQueryResult) throws IOException{
@@ -129,17 +139,21 @@ public class RouteSelectionMenu {
 		Location chicago = new Location(40, "Chicago");
 		Location atlanta = new Location(50, "Atlanta");
 		
+		locationList.clear();
 		locationList.add(miami);
 		locationList.add(newyork);
 		locationList.add(dallas);
 		locationList.add(chicago);
 		locationList.add(atlanta);
 		
+		airlineRouteList.clear();
 		airlineRouteList.add(new AirLineRoute(1, miami, newyork, 500, 600));
-		airlineRouteList.add(new AirLineRoute(2, newyork, dallas, 200, 300));
-		airlineRouteList.add(new AirLineRoute(3, dallas, chicago, 100, 200));
+		airlineRouteList.add(new AirLineRoute(2, newyork, dallas, 200, 200));
+		airlineRouteList.add(new AirLineRoute(3, dallas, chicago, 100, 900));
 		airlineRouteList.add(new AirLineRoute(4, chicago, atlanta, 400, 500));
 		airlineRouteList.add(new AirLineRoute(5, atlanta, miami, 300, 400));
-		airlineRouteList.add(new AirLineRoute(6, chicago, newyork, 600, 700));
+		airlineRouteList.add(new AirLineRoute(6, chicago, newyork, 600, 500));
+		airlineRouteList.add(new AirLineRoute(7, miami, atlanta, 600, 900));
+		airlineRouteList.add(new AirLineRoute(8, miami, chicago, 400, 300));
 	}
 }
