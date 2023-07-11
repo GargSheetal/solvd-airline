@@ -26,8 +26,8 @@ public class RouteSelectionMenu {
 	private static final Logger logger = LogManager.getLogger(RouteSelectionMenu.class);
 	private static Scanner scanner = new Scanner(System.in);
 	private static RouteSelectionMenuHelper routeSelectionMenuHelper;
-	private static LocationMyBatisService locationMyBatisService = new LocationMyBatisService();
-	private static AirLineRouteMybatisService airLineRouteMybatisService = new AirLineRouteMybatisService();
+	private static LocationMyBatisService locationMyBatisService;
+	private static AirLineRouteMybatisService airLineRouteMybatisService;
 	
 	private static List<Location> locationList = new ArrayList<>();
 	private static List<AirLineRoute> airlineRouteList = new ArrayList<>();
@@ -128,7 +128,9 @@ public class RouteSelectionMenu {
 	}
 	
 	private static void loadData() {
+		locationMyBatisService = new LocationMyBatisService();
 		locationList = locationMyBatisService.getAllLocations();
+		airLineRouteMybatisService = new AirLineRouteMybatisService();
 		airlineRouteList = airLineRouteMybatisService.getAllRoutes();
 	}
 	
